@@ -1,4 +1,4 @@
-import { Variants } from 'framer-motion';
+import { Variants } from 'motion/react';
 import { animations } from '@tuel/tokens';
 
 export const rotateVariants: Variants = {
@@ -8,7 +8,7 @@ export const rotateVariants: Variants = {
     opacity: 1,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };
@@ -23,7 +23,7 @@ export const rotate3DVariants: Variants = {
     opacity: 1,
     transition: {
       duration: animations.duration.slow / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };

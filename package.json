@@ -33,6 +33,13 @@
     "node": ">=18.0.0",
     "pnpm": ">=9.0.0"
   },
+  "pnpm": {
+    "overrides": {
+      "source-map": "0.7.6",
+      "@testing-library/react": "*",
+      "@testing-library/dom": "*"
+    }
+  },
   "dependencies": {
     "next": "^15.4.6",
     "react": "19.0.0-rc.1",

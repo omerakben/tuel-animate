@@ -21,7 +21,8 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@tuel/tokens": "workspace:*"
+    "@tuel/tokens": "workspace:*",
+    "motion": "^12.23.12"
   },
   "devDependencies": {
     "tsup": "^8.0.1",

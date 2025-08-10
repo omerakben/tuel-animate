@@ -21,7 +21,8 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@tuel/utils": "workspace:*"
+    "@tuel/utils": "workspace:*",
+    "motion": "^12.23.12"
   },
   "peerDependencies": {
     "gsap": ">=3.12.0",

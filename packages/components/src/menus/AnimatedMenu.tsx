@@ -1,6 +1,6 @@
 import { animations } from '@tuel/tokens';
 import { cn } from '@tuel/utils';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'motion/react';
 import { ReactNode, useRef, useState } from 'react';
 
 export interface MenuItem {

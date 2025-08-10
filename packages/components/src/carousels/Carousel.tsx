@@ -1,7 +1,7 @@
 import { useGsapContext } from '@tuel/gsap';
 import { animations } from '@tuel/tokens';
 import { cn, isClient } from '@tuel/utils';
-import { AnimatePresence, motion, PanInfo } from 'framer-motion';
+import { AnimatePresence, motion, PanInfo } from 'motion/react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';

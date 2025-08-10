@@ -1,4 +1,4 @@
-import { Variants } from 'framer-motion';
+import { Variants } from 'motion/react';
 import { animations } from '@tuel/tokens';
 
 export const staggerContainerVariants: Variants = {
@@ -19,7 +19,7 @@ export const staggerItemVariants: Variants = {
     y: 0,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };

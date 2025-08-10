@@ -1,4 +1,4 @@
-import { Variants } from 'framer-motion';
+import { Variants } from 'motion/react';
 import { animations } from '@tuel/tokens';
 
 export const scaleVariants: Variants = {
@@ -7,7 +7,7 @@ export const scaleVariants: Variants = {
     scale: 1,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };
@@ -19,7 +19,7 @@ export const scaleInVariants: Variants = {
     opacity: 1,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };
@@ -31,7 +31,7 @@ export const scaleOutVariants: Variants = {
     opacity: 0,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeIn,
+      ease: animations.easing.motion.easeIn,
     },
   },
 };

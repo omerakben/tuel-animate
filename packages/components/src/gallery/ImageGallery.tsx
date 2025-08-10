@@ -1,5 +1,5 @@
 import { cn, isClient } from '@tuel/utils';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { useRef, useState } from 'react';
 
 export interface GalleryImage {

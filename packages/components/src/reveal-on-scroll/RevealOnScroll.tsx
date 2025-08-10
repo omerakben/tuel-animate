@@ -1,7 +1,7 @@
 import { useGsapContext } from '@tuel/gsap';
 import { fadeInUpVariants } from '@tuel/motion';
 import { cn, isClient } from '@tuel/utils';
-import { motion, useAnimation, useInView, Variants } from 'framer-motion';
+import { motion, useAnimation, useInView, Variants } from 'motion/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ReactNode, useEffect, useRef, useState } from 'react';

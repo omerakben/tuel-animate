@@ -1,4 +1,4 @@
-import { Variants } from 'framer-motion';
+import { Variants } from 'motion/react';
 import { animations } from '@tuel/tokens';
 
 export const slideInLeftVariants: Variants = {
@@ -8,7 +8,7 @@ export const slideInLeftVariants: Variants = {
     opacity: 1,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };
@@ -20,7 +20,7 @@ export const slideInRightVariants: Variants = {
     opacity: 1,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };
@@ -32,7 +32,7 @@ export const slideInTopVariants: Variants = {
     opacity: 1,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };
@@ -44,7 +44,7 @@ export const slideInBottomVariants: Variants = {
     opacity: 1,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };

@@ -1,4 +1,4 @@
-import { Variants } from 'framer-motion';
+import { Variants } from 'motion/react';
 import { animations } from '@tuel/tokens';
 
 export const fadeVariants: Variants = {
@@ -7,14 +7,14 @@ export const fadeVariants: Variants = {
     opacity: 1,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
   exit: {
     opacity: 0,
     transition: {
       duration: animations.duration.fast / 1000,
-      ease: animations.easing.easeIn,
+      ease: animations.easing.motion.easeIn,
     },
   },
 };
@@ -26,7 +26,7 @@ export const fadeInUpVariants: Variants = {
     y: 0,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };
@@ -38,7 +38,7 @@ export const fadeInDownVariants: Variants = {
     y: 0,
     transition: {
       duration: animations.duration.normal / 1000,
-      ease: animations.easing.easeOut,
+      ease: animations.easing.motion.easeOut,
     },
   },
 };

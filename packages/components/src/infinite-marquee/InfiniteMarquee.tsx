@@ -1,5 +1,5 @@
 import { ReactNode, useRef, useState, useEffect } from 'react';
-import { motion, useAnimationControls } from 'framer-motion';
+import { motion, useAnimationControls } from 'motion/react';
 import { cn, isClient } from '@tuel/utils';
 
 export interface InfiniteMarqueeProps {

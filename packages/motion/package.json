@@ -22,17 +22,16 @@
   },
   "dependencies": {
     "@tuel/tokens": "workspace:*",
-    "@tuel/utils": "workspace:*"
+    "@tuel/utils": "workspace:*",
+    "motion": "^12.23.12"
   },
   "peerDependencies": {
-    "framer-motion": ">=10.0.0",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
-    "framer-motion": "^11.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsup": "^8.0.1",

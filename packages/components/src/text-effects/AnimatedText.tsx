@@ -1,5 +1,5 @@
 import { useRef, useEffect, ReactNode } from 'react';
-import { motion, Variants, useInView } from 'framer-motion';
+import { motion, Variants, useInView } from 'motion/react';
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useGsapContext, useIsomorphicLayoutEffect } from '@tuel/gsap';

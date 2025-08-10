@@ -1,5 +1,5 @@
 import { cn } from '@tuel/utils';
-import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
+import { motion, MotionValue, useScroll, useTransform } from 'motion/react';
 import { ReactNode, useRef } from 'react';
 
 export interface ParallaxScrollProps {
