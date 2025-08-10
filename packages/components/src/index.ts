@@ -54,8 +54,8 @@ export type { CarouselProps, CarouselSlide } from './carousels/Carousel';
 export { PageTransition } from './page-transitions/PageTransition';
 export type { PageTransitionProps } from './page-transitions/PageTransition';
 
-export { RouteTransition, ViewTransition } from './page-transitions/RouteTransition';
-export type { RouteTransitionProps, ViewTransitionProps } from './page-transitions/RouteTransition';
+export { RouteTransition } from './page-transitions/RouteTransition';
+export type { RouteTransitionProps } from './page-transitions/RouteTransition';
 
 export { SmoothScroll } from './page-transitions/SmoothScroll';
 export type { SmoothScrollProps } from './page-transitions/SmoothScroll';

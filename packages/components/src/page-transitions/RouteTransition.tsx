@@ -17,18 +17,16 @@ export function RouteTransition({
   duration = 0.6,
   backgroundColor = 'bg-black',
 }: RouteTransitionProps) {
+  // Suppress unused variable warnings for props that will be used when re-enabled
+  void variant;
+  void duration;
+  void backgroundColor;
+
   return (
     <DisabledComponentPlaceholder
-      componentName="RouteTransition"
-      reason="Next.js App Router compatibility - needs migration from pages router events"
-      estimatedTimeToReEnable="1-2 weeks"
-      originalProps={{
-        variant,
-        duration,
-        backgroundColor,
-        onTransitionStart: 'function',
-        onTransitionEnd: 'function',
-      }}
+      name="RouteTransition"
+      description="Next.js App Router compatibility - needs migration from pages router events"
+      className="min-h-[200px]"
     >
       {children}
     </DisabledComponentPlaceholder>
