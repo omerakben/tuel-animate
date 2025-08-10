@@ -1,0 +1,40 @@
+{
+  "name": "@tuel/docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tuel/components": "workspace:*",
+    "@tuel/gsap": "workspace:*",
+    "@tuel/motion": "workspace:*",
+    "@tuel/tailwind-preset": "workspace:*",
+    "@tuel/three": "workspace:*",
+    "@tuel/tokens": "workspace:*",
+    "@tuel/utils": "workspace:*",
+    "@react-three/drei": "^9.96.0",
+    "@react-three/fiber": "^8.15.0",
+    "framer-motion": "^11.0.0",
+    "gsap": "^3.12.5",
+    "next": "14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.160.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  }
+}
