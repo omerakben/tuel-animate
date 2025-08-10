@@ -1,9 +1,9 @@
 import { defineConfig } from 'tsup';
 
-export default defineConfig({
+export default defineConfig((options) => ({
   entry: ['src/index.ts'],
   format: ['cjs', 'esm'],
-  dts: true,
+  dts: !options.watch, // Skip DTS generation in watch mode to avoid dependency issues
   splitting: true,
   sourcemap: true,
   clean: true,
@@ -17,4 +17,4 @@ export default defineConfig({
     '@react-three/fiber',
     '@react-three/drei',
   ],
-});
+}));
