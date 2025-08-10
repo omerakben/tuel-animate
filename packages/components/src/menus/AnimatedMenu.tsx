@@ -1,3 +1,4 @@
+import { animations } from '@tuel/tokens';
 import { cn } from '@tuel/utils';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { ReactNode, useRef, useState } from 'react';
@@ -49,12 +50,12 @@ export function AnimatedMenu({
           visible: {
             clipPath: 'circle(150% at 50% 50%)',
             opacity: 1,
-            transition: { duration: animationDuration, ease: 'easeInOut' },
+            transition: { duration: animationDuration, ease: animations.easing.motion.easeInOut },
           },
           exit: {
             clipPath: 'circle(0% at 50% 50%)',
             opacity: 0,
-            transition: { duration: animationDuration, ease: 'easeInOut' },
+            transition: { duration: animationDuration, ease: animations.easing.motion.easeInOut },
           },
         };
       case 'push': {
@@ -69,11 +70,11 @@ export function AnimatedMenu({
           visible: {
             x: 0,
             y: 0,
-            transition: { duration: animationDuration, ease: 'easeOut' },
+            transition: { duration: animationDuration, ease: animations.easing.motion.easeOut },
           },
           exit: {
             ...pushDirection[position],
-            transition: { duration: animationDuration, ease: 'easeIn' },
+            transition: { duration: animationDuration, ease: animations.easing.motion.easeIn },
           },
         };
       }
@@ -86,12 +87,12 @@ export function AnimatedMenu({
           visible: {
             scale: 1,
             borderRadius: '0%',
-            transition: { duration: animationDuration, ease: 'easeOut' },
+            transition: { duration: animationDuration, ease: animations.easing.motion.easeOut },
           },
           exit: {
             scale: 0,
             borderRadius: '50%',
-            transition: { duration: animationDuration, ease: 'easeIn' },
+            transition: { duration: animationDuration, ease: animations.easing.motion.easeIn },
           },
         };
       case 'circular':
@@ -101,11 +102,11 @@ export function AnimatedMenu({
           },
           visible: {
             clipPath: 'circle(150% at 50% 50%)',
-            transition: { duration: animationDuration, ease: 'easeOut' },
+            transition: { duration: animationDuration, ease: animations.easing.motion.easeOut },
           },
           exit: {
             clipPath: `circle(0% at ${position === 'right' ? '100% 0%' : '0% 0%'})`,
-            transition: { duration: animationDuration, ease: 'easeIn' },
+            transition: { duration: animationDuration, ease: animations.easing.motion.easeIn },
           },
         };
       default: {
@@ -146,7 +147,7 @@ export function AnimatedMenu({
       transition: {
         delay: i * staggerDelay,
         duration: 0.3,
-        ease: 'easeOut',
+        ease: animations.easing.motion.easeOut,
       },
     }),
     exit: {

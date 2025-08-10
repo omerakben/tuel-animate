@@ -1,4 +1,5 @@
 import { useGsapContext } from '@tuel/gsap';
+import { animations } from '@tuel/tokens';
 import { cn, isClient } from '@tuel/utils';
 import { motion, useScroll, useTransform, Variants } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -72,7 +73,7 @@ export function HeroSection({
             y: 0,
             transition: {
               duration: 1,
-              ease: 'easeOut',
+              ease: animations.easing.motion.easeOut,
               staggerChildren: 0.2,
             },
           },
@@ -85,7 +86,7 @@ export function HeroSection({
             scale: 1,
             transition: {
               duration: 1.5,
-              ease: 'easeOut',
+              ease: animations.easing.motion.easeOut,
             },
           },
         };
@@ -118,7 +119,7 @@ export function HeroSection({
             opacity: 1,
             transition: {
               duration: 1,
-              ease: 'easeOut',
+              ease: animations.easing.motion.easeOut,
             },
           },
         };

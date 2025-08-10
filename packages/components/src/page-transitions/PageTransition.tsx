@@ -1,4 +1,5 @@
 import { useGsapContext } from '@tuel/gsap';
+import { animations } from '@tuel/tokens';
 import { cn, isClient } from '@tuel/utils';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -213,7 +214,7 @@ export function PageTransition({
             transition: {
               duration,
               delay,
-              ease: 'easeOut',
+              ease: animations.easing.motion.easeOut,
             },
           },
           exit: {
@@ -278,7 +279,7 @@ export function PageTransition({
             transition: {
               duration: duration * 1.5,
               delay,
-              ease: 'easeInOut',
+              ease: animations.easing.motion.easeInOut,
             },
           },
           exit: {

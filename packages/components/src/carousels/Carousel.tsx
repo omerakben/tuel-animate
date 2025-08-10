@@ -1,4 +1,5 @@
 import { useGsapContext } from '@tuel/gsap';
+import { animations } from '@tuel/tokens';
 import { cn, isClient } from '@tuel/utils';
 import { AnimatePresence, motion, PanInfo } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -236,7 +237,7 @@ export function Carousel({
             exit="exit"
             transition={{
               opacity: { duration: 0.5 },
-              default: { duration: 0.7, ease: 'easeInOut' },
+              default: { duration: 0.7, ease: animations.easing.motion.easeInOut },
             }}
             drag={draggable && variant !== '3d' ? (direction === 'horizontal' ? 'x' : 'y') : false}
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}

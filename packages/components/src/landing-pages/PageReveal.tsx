@@ -1,3 +1,4 @@
+import { animations } from '@tuel/tokens';
 import { cn } from '@tuel/utils';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { ReactNode, useEffect, useState } from 'react';
@@ -106,7 +107,7 @@ export function PageReveal({
             transition: {
               duration,
               delay,
-              ease: 'easeOut',
+              ease: animations.easing.motion.easeOut,
             },
           },
           exit: {
@@ -171,7 +172,7 @@ export function PageReveal({
             transition: {
               duration: duration * 1.5,
               delay,
-              ease: 'easeInOut',
+              ease: animations.easing.motion.easeInOut,
             },
           },
           exit: {
