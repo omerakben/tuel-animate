@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'react';
 import { cn, isClient } from '@tuel/utils';
+import { useEffect, useRef } from 'react';
 
 export interface Wave {
   amplitude: number;
@@ -30,9 +30,33 @@ export interface WaveCanvasProps {
 export function WaveCanvas({
   className,
   waves = [
-    { amplitude: 50, frequency: 0.01, speed: 0.02, phase: 0, color: '#3b82f6', lineWidth: 2, opacity: 1 },
-    { amplitude: 30, frequency: 0.02, speed: 0.03, phase: Math.PI / 4, color: '#8b5cf6', lineWidth: 2, opacity: 0.8 },
-    { amplitude: 20, frequency: 0.03, speed: 0.04, phase: Math.PI / 2, color: '#ec4899', lineWidth: 2, opacity: 0.6 },
+    {
+      amplitude: 50,
+      frequency: 0.01,
+      speed: 0.02,
+      phase: 0,
+      color: '#3b82f6',
+      lineWidth: 2,
+      opacity: 1,
+    },
+    {
+      amplitude: 30,
+      frequency: 0.02,
+      speed: 0.03,
+      phase: Math.PI / 4,
+      color: '#8b5cf6',
+      lineWidth: 2,
+      opacity: 0.8,
+    },
+    {
+      amplitude: 20,
+      frequency: 0.03,
+      speed: 0.04,
+      phase: Math.PI / 2,
+      color: '#ec4899',
+      lineWidth: 2,
+      opacity: 0.6,
+    },
   ],
   backgroundColor = 'transparent',
   resolution = 2,
@@ -47,7 +71,7 @@ export function WaveCanvas({
   glowIntensity = 20,
 }: WaveCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
   const timeRef = useRef(0);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const isPlayingRef = useRef(autoPlay);
@@ -70,16 +94,21 @@ export function WaveCanvas({
     resizeCanvas();
 
     // Draw wave
-    const drawWave = (wave: Wave, index: number) => {
+    const drawWave = (wave: Wave, _index: number) => {
       const width = canvas.offsetWidth;
       const height = canvas.offsetHeight;
       const centerY = height / 2;
 
       ctx.beginPath();
-      
+
       // Create gradient if needed
       if (gradient && gradientColors.length > 0) {
-        const grad = ctx.createLinearGradient(0, centerY - wave.amplitude, 0, centerY + wave.amplitude);
+        const grad = ctx.createLinearGradient(
+          0,
+          centerY - wave.amplitude,
+          0,
+          centerY + wave.amplitude
+        );
         gradientColors.forEach((color, i) => {
           grad.addColorStop(i / (gradientColors.length - 1), color);
         });
@@ -102,20 +131,31 @@ export function WaveCanvas({
       // Draw wave path
       for (let x = 0; x <= width; x += resolution) {
         // Calculate base wave
-        let y = centerY + Math.sin(x * wave.frequency + timeRef.current * wave.speed + wave.phase) * wave.amplitude;
-        
+        let y =
+          centerY +
+          Math.sin(x * wave.frequency + timeRef.current * wave.speed + wave.phase) * wave.amplitude;
+
         // Add mouse influence
         if (interactive && mouseRef.current.x > 0) {
           const distance = Math.abs(x - mouseRef.current.x);
           if (distance < mouseInfluence * 2) {
             const influence = (1 - distance / (mouseInfluence * 2)) * mouseInfluence;
-            y += Math.sin(timeRef.current * 0.05) * influence * Math.sign(mouseRef.current.y - centerY);
+            y +=
+              Math.sin(timeRef.current * 0.05) *
+              influence *
+              Math.sign(mouseRef.current.y - centerY);
           }
         }
 
         // Add secondary harmonics for complexity
-        y += Math.sin(x * wave.frequency * 2 + timeRef.current * wave.speed * 1.5) * wave.amplitude * 0.3;
-        y += Math.sin(x * wave.frequency * 3 + timeRef.current * wave.speed * 0.5) * wave.amplitude * 0.1;
+        y +=
+          Math.sin(x * wave.frequency * 2 + timeRef.current * wave.speed * 1.5) *
+          wave.amplitude *
+          0.3;
+        y +=
+          Math.sin(x * wave.frequency * 3 + timeRef.current * wave.speed * 0.5) *
+          wave.amplitude *
+          0.1;
 
         if (x === 0) {
           ctx.moveTo(x, y);

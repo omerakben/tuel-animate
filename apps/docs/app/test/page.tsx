@@ -1,77 +1,115 @@
 'use client';
 
-import { Suspense, lazy, useState } from 'react';
-import dynamic from 'next/dynamic';
 import {
-  // Scroll Animations
-  ScrollFrameAnimation,
-  ParallaxScroll,
-  ParallaxLayer,
-  RevealOnScroll,
-  StickyCards,
-  
-  // Page Transitions
-  PageTransition,
-  SmoothScroll,
-  ImageTrail,
-  
-  // Text Effects
-  AnimatedText,
-  
+  AnimatedMenu,
   // UI Components
   Carousel,
-  AnimatedMenu,
-  ImageGallery,
   HeroSection,
-  InfiniteMarquee,
   HoverDistortion,
-  
+  ImageGallery,
+  ImageTrail,
+  InfiniteMarquee,
+  // Page Transitions
+  PageTransition,
+  ParallaxLayer,
+  ParallaxScroll,
   // Canvas Components
   ParticleField,
+  RevealOnScroll,
+  StickyCards,
   WaveCanvas,
-  NoiseField,
 } from '@tuel/components';
+import dynamic from 'next/dynamic';
+import { Suspense, useState } from 'react';
+
+// Import mock components for React 19 compatibility
+import {
+  AnimatedText,
+  FloatingObjects,
+  MorphingShapes,
+  NoiseField,
+  ParticleWave,
+} from '../../components/DisabledComponents';
 
 // Lazy load heavy 3D components and SSR-incompatible components
-const FloatingObjects = dynamic(
-  () => import('@tuel/components').then(mod => mod.FloatingObjects),
-  { ssr: false }
-);
+// const FloatingObjects = dynamic(
+//   () => import('@tuel/components').then(mod => mod.FloatingObjects),
+//   { ssr: false }
+// );
 
 const ScrollMinimapDynamic = dynamic(
-  () => import('@tuel/components').then(mod => mod.ScrollMinimap),
+  () => import('@tuel/components').then((mod) => mod.ScrollMinimap),
   { ssr: false }
 );
 
-const ParticleWave = dynamic(
-  () => import('@tuel/components').then(mod => mod.ParticleWave),
-  { ssr: false }
-);
+// Disabled Three.js components - import as mocks instead
+// const ParticleWave = dynamic(
+//   () => import('@tuel/components').then(mod => mod.ParticleWave),
+//   { ssr: false }
+// );
 
-const MorphingShapes = dynamic(
-  () => import('@tuel/components').then(mod => mod.MorphingShapes),
-  { ssr: false }
-);
+// const MorphingShapes = dynamic(
+//   () => import('@tuel/components').then(mod => mod.MorphingShapes),
+//   { ssr: false }
+// );
 
-const ParticleText = dynamic(
-  () => import('@tuel/components').then(mod => mod.ParticleText),
-  { ssr: false }
-);
+const ParticleText = dynamic(() => import('@tuel/components').then((mod) => mod.ParticleText), {
+  ssr: false,
+});
 
 export default function TestPage() {
   const [activeSection, setActiveSection] = useState('hero');
 
   // Sample data
   const carouselSlides = [
-    { id: '1', title: 'Slide 1', description: 'First slide', content: <div className="p-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg">Slide 1 Content</div> },
-    { id: '2', title: 'Slide 2', description: 'Second slide', content: <div className="p-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg">Slide 2 Content</div> },
-    { id: '3', title: 'Slide 3', description: 'Third slide', content: <div className="p-8 bg-gradient-to-r from-green-500 to-yellow-500 rounded-lg">Slide 3 Content</div> },
+    {
+      id: '1',
+      title: 'Slide 1',
+      description: 'First slide',
+      content: (
+        <div className="p-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg">
+          Slide 1 Content
+        </div>
+      ),
+    },
+    {
+      id: '2',
+      title: 'Slide 2',
+      description: 'Second slide',
+      content: (
+        <div className="p-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg">
+          Slide 2 Content
+        </div>
+      ),
+    },
+    {
+      id: '3',
+      title: 'Slide 3',
+      description: 'Third slide',
+      content: (
+        <div className="p-8 bg-gradient-to-r from-green-500 to-yellow-500 rounded-lg">
+          Slide 3 Content
+        </div>
+      ),
+    },
   ];
 
   const stickyCards = [
-    { id: '1', content: <div className="p-8 text-white">Card 1 - Scroll to see effect</div>, backgroundColor: '#8b5cf6' },
-    { id: '2', content: <div className="p-8 text-white">Card 2 - Stacking animation</div>, backgroundColor: '#3b82f6' },
-    { id: '3', content: <div className="p-8 text-white">Card 3 - Beautiful transitions</div>, backgroundColor: '#ec4899' },
+    {
+      id: '1',
+      content: <div className="p-8 text-white">Card 1 - Scroll to see effect</div>,
+      backgroundColor: '#8b5cf6',
+    },
+    {
+      id: '2',
+      content: <div className="p-8 text-white">Card 2 - Stacking animation</div>,
+      backgroundColor: '#3b82f6',
+    },
+    {
+      id: '3',
+      content: <div className="p-8 text-white">Card 3 - Beautiful transitions</div>,
+      backgroundColor: '#ec4899',
+    },
   ];
 
   const menuItems = [
@@ -82,12 +120,42 @@ export default function TestPage() {
   ];
 
   const galleryImages = [
-    { id: '1', src: 'https://picsum.photos/400/300?random=1', alt: 'Image 1', caption: 'Beautiful landscape' },
-    { id: '2', src: 'https://picsum.photos/400/300?random=2', alt: 'Image 2', caption: 'Urban architecture' },
-    { id: '3', src: 'https://picsum.photos/400/300?random=3', alt: 'Image 3', caption: 'Nature close-up' },
-    { id: '4', src: 'https://picsum.photos/400/300?random=4', alt: 'Image 4', caption: 'Abstract art' },
-    { id: '5', src: 'https://picsum.photos/400/300?random=5', alt: 'Image 5', caption: 'City lights' },
-    { id: '6', src: 'https://picsum.photos/400/300?random=6', alt: 'Image 6', caption: 'Mountain view' },
+    {
+      id: '1',
+      src: 'https://picsum.photos/400/300?random=1',
+      alt: 'Image 1',
+      caption: 'Beautiful landscape',
+    },
+    {
+      id: '2',
+      src: 'https://picsum.photos/400/300?random=2',
+      alt: 'Image 2',
+      caption: 'Urban architecture',
+    },
+    {
+      id: '3',
+      src: 'https://picsum.photos/400/300?random=3',
+      alt: 'Image 3',
+      caption: 'Nature close-up',
+    },
+    {
+      id: '4',
+      src: 'https://picsum.photos/400/300?random=4',
+      alt: 'Image 4',
+      caption: 'Abstract art',
+    },
+    {
+      id: '5',
+      src: 'https://picsum.photos/400/300?random=5',
+      alt: 'Image 5',
+      caption: 'City lights',
+    },
+    {
+      id: '6',
+      src: 'https://picsum.photos/400/300?random=6',
+      alt: 'Image 6',
+      caption: 'Mountain view',
+    },
   ];
 
   return (
@@ -108,11 +176,7 @@ export default function TestPage() {
       />
 
       {/* Menu */}
-      <AnimatedMenu
-        items={menuItems}
-        variant="slide"
-        position="left"
-      />
+      <AnimatedMenu items={menuItems} variant="slide" position="left" />
 
       {/* Hero Section */}
       <section id="hero" className="relative h-screen">
@@ -129,7 +193,7 @@ export default function TestPage() {
             { label: 'Documentation', href: '/docs', variant: 'secondary' },
           ]}
         />
-        
+
         {/* Infinite Marquee */}
         <div className="absolute bottom-0 left-0 right-0 bg-black/50 backdrop-blur py-4">
           <InfiniteMarquee speed={50} pauseOnHover>
@@ -146,7 +210,10 @@ export default function TestPage() {
       </section>
 
       {/* Text Effects Section */}
-      <section id="text-effects" className="min-h-screen p-20 flex flex-col justify-center items-center space-y-16">
+      <section
+        id="text-effects"
+        className="min-h-screen p-20 flex flex-col justify-center items-center space-y-16"
+      >
         <RevealOnScroll animation="fade-up">
           <AnimatedText
             text="Amazing Text Animations"
@@ -194,7 +261,7 @@ export default function TestPage() {
         <RevealOnScroll animation="fade-up">
           <h2 className="text-4xl font-bold mb-12 text-center">Advanced Carousel</h2>
         </RevealOnScroll>
-        
+
         <div className="h-96">
           <Carousel
             slides={carouselSlides}
@@ -209,11 +276,7 @@ export default function TestPage() {
 
       {/* Sticky Cards */}
       <section className="min-h-screen">
-        <StickyCards
-          cards={stickyCards}
-          variant="scale"
-          spacing={100}
-        />
+        <StickyCards cards={stickyCards} variant="scale" spacing={100} />
       </section>
 
       {/* Particles Section */}
@@ -236,8 +299,24 @@ export default function TestPage() {
         <div className="absolute inset-0">
           <WaveCanvas
             waves={[
-              { amplitude: 50, frequency: 0.01, speed: 0.02, phase: 0, color: '#3b82f6', lineWidth: 2, opacity: 1 },
-              { amplitude: 30, frequency: 0.02, speed: 0.03, phase: Math.PI / 4, color: '#8b5cf6', lineWidth: 2, opacity: 0.8 },
+              {
+                amplitude: 50,
+                frequency: 0.01,
+                speed: 0.02,
+                phase: 0,
+                color: '#3b82f6',
+                lineWidth: 2,
+                opacity: 1,
+              },
+              {
+                amplitude: 30,
+                frequency: 0.02,
+                speed: 0.03,
+                phase: Math.PI / 4,
+                color: '#8b5cf6',
+                lineWidth: 2,
+                opacity: 0.8,
+              },
             ]}
             gradient={true}
             interactive={true}
@@ -268,8 +347,10 @@ export default function TestPage() {
       {/* 3D Section */}
       <section id="three-d" className="min-h-screen">
         <h2 className="text-4xl font-bold text-center py-12">3D Animations</h2>
-        
-        <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading 3D...</div>}>
+
+        <Suspense
+          fallback={<div className="h-96 flex items-center justify-center">Loading 3D...</div>}
+        >
           <div className="h-96">
             <FloatingObjects
               objects={[
@@ -284,7 +365,9 @@ export default function TestPage() {
           </div>
         </Suspense>
 
-        <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading 3D...</div>}>
+        <Suspense
+          fallback={<div className="h-96 flex items-center justify-center">Loading 3D...</div>}
+        >
           <div className="h-96 mt-12">
             <ParticleWave
               particleCount={5000}
@@ -295,13 +378,27 @@ export default function TestPage() {
           </div>
         </Suspense>
 
-        <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading 3D...</div>}>
+        <Suspense
+          fallback={<div className="h-96 flex items-center justify-center">Loading 3D...</div>}
+        >
           <div className="h-96 mt-12">
             <MorphingShapes
               shapes={[
-                { position: [-3, 0, 0], color: '#8b5cf6', morphTargets: ['sphere', 'box', 'torus'] },
-                { position: [0, 0, 0], color: '#3b82f6', morphTargets: ['box', 'dodecahedron', 'sphere'] },
-                { position: [3, 0, 0], color: '#ec4899', morphTargets: ['cone', 'octahedron', 'torus'] },
+                {
+                  position: [-3, 0, 0],
+                  color: '#8b5cf6',
+                  morphTargets: ['sphere', 'box', 'torus'],
+                },
+                {
+                  position: [0, 0, 0],
+                  color: '#3b82f6',
+                  morphTargets: ['box', 'dodecahedron', 'sphere'],
+                },
+                {
+                  position: [3, 0, 0],
+                  color: '#ec4899',
+                  morphTargets: ['cone', 'octahedron', 'torus'],
+                },
               ]}
               enableOrbitControls={true}
               autoRotate={true}
@@ -343,8 +440,8 @@ export default function TestPage() {
       <section className="h-screen">
         <ParallaxScroll>
           <ParallaxLayer speed={0.5}>
-            <img 
-              src="https://picsum.photos/1920/1080?random=bg" 
+            <img
+              src="https://picsum.photos/1920/1080?random=bg"
               alt="Background"
               className="w-full h-full object-cover"
             />

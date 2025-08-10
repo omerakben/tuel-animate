@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState } from 'react';
 import { cn, isClient } from '@tuel/utils';
+import { useEffect, useRef, useState } from 'react';
 
 export interface HoverDistortionProps {
   image: string;
@@ -35,7 +35,7 @@ export function HoverDistortion({
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(0);
   const progressRef = useRef(0);
 
   useEffect(() => {
@@ -81,7 +81,7 @@ export function HoverDistortion({
         if (!ctx || !canvas) return;
 
         // Update progress
-        const target = (isHovered || autoPlay) ? 1 : 0;
+        const target = isHovered || autoPlay ? 1 : 0;
         progressRef.current += (target - progressRef.current) * speed * 0.1;
 
         // Clear canvas
@@ -123,28 +123,33 @@ export function HoverDistortion({
           tempCanvas.width = canvas.width;
           tempCanvas.height = canvas.height;
           const tempCtx = tempCanvas.getContext('2d');
-          
+
           if (tempCtx) {
             // Draw displacement map
             tempCtx.drawImage(displacementImg, 0, 0, canvas.width, canvas.height);
             const displacementData = tempCtx.getImageData(0, 0, canvas.width, canvas.height);
-            
+
             // Draw distorted image
             const segmentsX = 20;
             const segmentsY = 20;
             const segmentWidth = canvas.width / segmentsX;
             const segmentHeight = canvas.height / segmentsY;
-            
+
             for (let y = 0; y < segmentsY; y++) {
               for (let x = 0; x < segmentsX; x++) {
-                const idx = ((y * segmentHeight) * canvas.width + (x * segmentWidth)) * 4;
-                const dispX = (displacementData.data[idx] / 255 - 0.5) * intensity * progressRef.current * 50;
-                const dispY = (displacementData.data[idx + 1] / 255 - 0.5) * intensity * progressRef.current * 50;
-                
+                const idx = (y * segmentHeight * canvas.width + x * segmentWidth) * 4;
+                const dispX =
+                  (displacementData.data[idx] / 255 - 0.5) * intensity * progressRef.current * 50;
+                const dispY =
+                  (displacementData.data[idx + 1] / 255 - 0.5) *
+                  intensity *
+                  progressRef.current *
+                  50;
+
                 ctx.drawImage(
                   img,
-                  (x * segmentWidth / canvas.width) * img.width,
-                  (y * segmentHeight / canvas.height) * img.height,
+                  ((x * segmentWidth) / canvas.width) * img.width,
+                  ((y * segmentHeight) / canvas.height) * img.height,
                   (segmentWidth / canvas.width) * img.width,
                   (segmentHeight / canvas.height) * img.height,
                   offsetX + x * segmentWidth + dispX,
@@ -165,7 +170,7 @@ export function HoverDistortion({
           const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
           const data = imageData.data;
           const shift = Math.floor(rgbIntensity * progressRef.current * 10);
-          
+
           for (let i = 0; i < data.length; i += 4) {
             // Shift red channel
             if (i + shift * 4 < data.length) {
@@ -176,7 +181,7 @@ export function HoverDistortion({
               data[i + 2] = data[i - shift * 4 + 2];
             }
           }
-          
+
           ctx.putImageData(imageData, 0, 0);
         }
 
@@ -233,11 +238,7 @@ export function HoverDistortion({
 
   return (
     <div ref={containerRef} className={cn('relative overflow-hidden', className)}>
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full"
-        style={{ mixBlendMode: blendMode }}
-      />
+      <canvas ref={canvasRef} className="w-full h-full" style={{ mixBlendMode: blendMode }} />
     </div>
   );
 }

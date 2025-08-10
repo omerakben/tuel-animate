@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'react';
 import { cn, isClient } from '@tuel/utils';
+import { useEffect, useRef } from 'react';
 
 export interface Particle {
   x: number;
@@ -61,7 +61,7 @@ export function ParticleField({
   fadeOut = true,
 }: ParticleFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const emitTimerRef = useRef(0);
@@ -93,12 +93,13 @@ export function ParticleField({
 
     // Create a particle
     const createParticle = (x?: number, y?: number): Particle => {
-      const angle = direction.x === 0 && direction.y === 0
-        ? Math.random() * Math.PI * 2
-        : Math.atan2(direction.y, direction.x) + (Math.random() - 0.5) * spread;
-      
+      const angle =
+        direction.x === 0 && direction.y === 0
+          ? Math.random() * Math.PI * 2
+          : Math.atan2(direction.y, direction.x) + (Math.random() - 0.5) * spread;
+
       const velocity = speed * (0.5 + Math.random() * 0.5);
-      
+
       return {
         x: x ?? Math.random() * canvas.offsetWidth,
         y: y ?? Math.random() * canvas.offsetHeight,
@@ -121,7 +122,12 @@ export function ParticleField({
 
       switch (shape) {
         case 'square':
-          ctx.fillRect(-particle.radius, -particle.radius, particle.radius * 2, particle.radius * 2);
+          ctx.fillRect(
+            -particle.radius,
+            -particle.radius,
+            particle.radius * 2,
+            particle.radius * 2
+          );
           break;
         case 'triangle':
           ctx.beginPath();
@@ -184,11 +190,17 @@ export function ParticleField({
       if (bounce) {
         if (particle.x <= particle.radius || particle.x >= canvas.offsetWidth - particle.radius) {
           particle.vx *= -0.9;
-          particle.x = Math.max(particle.radius, Math.min(canvas.offsetWidth - particle.radius, particle.x));
+          particle.x = Math.max(
+            particle.radius,
+            Math.min(canvas.offsetWidth - particle.radius, particle.x)
+          );
         }
         if (particle.y <= particle.radius || particle.y >= canvas.offsetHeight - particle.radius) {
           particle.vy *= -0.9;
-          particle.y = Math.max(particle.radius, Math.min(canvas.offsetHeight - particle.radius, particle.y));
+          particle.y = Math.max(
+            particle.radius,
+            Math.min(canvas.offsetHeight - particle.radius, particle.y)
+          );
         }
       } else if (wrap) {
         if (particle.x < -particle.radius) particle.x = canvas.offsetWidth + particle.radius;
@@ -202,7 +214,7 @@ export function ParticleField({
         const dx = mouseRef.current.x - particle.x;
         const dy = mouseRef.current.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        
+
         if (distance < mouseRadius) {
           const force = (1 - distance / mouseRadius) * mouseForce;
           particle.vx -= (dx / distance) * force;
@@ -225,7 +237,8 @@ export function ParticleField({
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
-            ctx.globalAlpha = (1 - distance / connectionDistance) * 0.5 * Math.min(p1.opacity, p2.opacity);
+            ctx.globalAlpha =
+              (1 - distance / connectionDistance) * 0.5 * Math.min(p1.opacity, p2.opacity);
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
@@ -256,27 +269,31 @@ export function ParticleField({
         const emitInterval = 1 / emitRate;
         while (emitTimerRef.current > emitInterval) {
           emitTimerRef.current -= emitInterval;
-          particlesRef.current.push(createParticle(canvas.offsetWidth / 2, canvas.offsetHeight / 2));
+          particlesRef.current.push(
+            createParticle(canvas.offsetWidth / 2, canvas.offsetHeight / 2)
+          );
         }
       }
 
       // Update and draw particles
       particlesRef.current = particlesRef.current.filter((particle) => {
         updateParticle(particle, deltaTime * 60);
-        
+
         // Remove dead particles
         if (particle.maxLife !== Infinity && particle.life > particle.maxLife) {
           return false;
         }
-        if (!wrap && !bounce && (
-          particle.x < -particle.radius - 100 ||
-          particle.x > canvas.offsetWidth + particle.radius + 100 ||
-          particle.y < -particle.radius - 100 ||
-          particle.y > canvas.offsetHeight + particle.radius + 100
-        )) {
+        if (
+          !wrap &&
+          !bounce &&
+          (particle.x < -particle.radius - 100 ||
+            particle.x > canvas.offsetWidth + particle.radius + 100 ||
+            particle.y < -particle.radius - 100 ||
+            particle.y > canvas.offsetHeight + particle.radius + 100)
+        ) {
           return false;
         }
-        
+
         drawParticle(particle);
         return true;
       });

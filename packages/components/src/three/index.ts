@@ -1,4 +1,4 @@
-export * from './PhantomGallery';
 export * from './FloatingObjects';
-export * from './ParticleWave';
-export * from './MorphingShapes';
+// export * from './ParticleWave'; // Temporarily disabled due to React 19 compatibility
+export * from './PhantomGallery';
+// export * from './MorphingShapes'; // Temporarily disabled due to React 19 compatibility

@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState } from 'react';
 import { cn, isClient } from '@tuel/utils';
+import { useEffect, useRef, useState } from 'react';
 
 export interface ParticleTextProps {
   text: string;
@@ -59,7 +59,7 @@ export function ParticleText({
   density = 1,
 }: ParticleTextProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
   const particlesRef = useRef<TextParticle[]>([]);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const waveOffsetRef = useRef(0);
@@ -85,7 +85,7 @@ export function ParticleText({
     // Initialize particles from text
     const initializeParticles = () => {
       particlesRef.current = [];
-      
+
       // Create temporary canvas to get text pixels
       const tempCanvas = document.createElement('canvas');
       const tempCtx = tempCanvas.getContext('2d');
@@ -152,7 +152,7 @@ export function ParticleText({
         if (distance < mouseRadius) {
           const angle = Math.atan2(dy, dx);
           const force = (1 - distance / mouseRadius) * mouseForce;
-          
+
           if (hover) {
             // Repel particles
             particle.vx -= Math.cos(angle) * force;
@@ -199,14 +199,14 @@ export function ParticleText({
     // Draw particle
     const drawParticle = (particle: TextParticle) => {
       ctx.save();
-      
+
       // Apply some alpha based on distance from mouse
       let alpha = 1;
       if (interactive && particle.distance > 0 && particle.distance < mouseRadius * 2) {
         alpha = 1 - (particle.distance - mouseRadius) / mouseRadius;
         alpha = Math.max(0.3, Math.min(1, alpha));
       }
-      
+
       ctx.globalAlpha = alpha;
       ctx.fillStyle = particle.color;
       ctx.beginPath();

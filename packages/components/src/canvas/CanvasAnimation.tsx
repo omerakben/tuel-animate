@@ -1,5 +1,5 @@
-import { useRef, useEffect, ReactNode } from 'react';
 import { cn, isClient } from '@tuel/utils';
+import { ReactNode, useEffect, useRef } from 'react';
 
 export interface CanvasAnimationProps {
   className?: string;
@@ -35,7 +35,7 @@ export function CanvasAnimation({
   children,
 }: CanvasAnimationProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
   const frameRef = useRef(0);
   const lastTimeRef = useRef(0);
   const isPlayingRef = useRef(autoPlay);
@@ -53,14 +53,14 @@ export function CanvasAnimation({
     const resizeCanvas = () => {
       const w = width || canvas.offsetWidth;
       const h = height || canvas.offsetHeight;
-      
+
       canvas.width = w * window.devicePixelRatio;
       canvas.height = h * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-      
+
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
-      
+
       onResize?.(ctx, w, h);
     };
     resizeCanvas();
@@ -74,7 +74,7 @@ export function CanvasAnimation({
       if (!isPlayingRef.current) return;
 
       const deltaTime = time - lastTimeRef.current;
-      
+
       if (deltaTime >= frameInterval) {
         // Clear canvas
         if (backgroundColor === 'transparent') {
@@ -163,11 +163,7 @@ export function CanvasAnimation({
         className="block w-full h-full"
         style={{ background: backgroundColor }}
       />
-      {children && (
-        <div className="absolute inset-0 pointer-events-none">
-          {children}
-        </div>
-      )}
+      {children && <div className="absolute inset-0 pointer-events-none">{children}</div>}
     </div>
   );
 }

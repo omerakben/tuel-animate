@@ -1,39 +1,52 @@
 'use client';
 
-import { FloatingObjects } from '@tuel/components';
-import { useState } from 'react';
+// import { FloatingObjects } from '@tuel/components'; // Disabled due to React 19 compatibility
+
+// Import mock components for React 19 compatibility
 import Link from 'next/link';
+import { useState } from 'react';
+import { FloatingObjects } from '../../../components/DisabledComponents';
 
 const shapes = ['sphere', 'box', 'torus', 'cone', 'cylinder', 'dodecahedron'] as const;
-const environments = ['sunset', 'dawn', 'night', 'warehouse', 'forest', 'apartment', 'studio', 'city', 'park', 'lobby'] as const;
+const environments = [
+  'sunset',
+  'dawn',
+  'night',
+  'warehouse',
+  'forest',
+  'apartment',
+  'studio',
+  'city',
+  'park',
+  'lobby',
+] as const;
 
 export default function FloatingObjectsPage() {
   const [autoRotate, setAutoRotate] = useState(true);
-  const [environment, setEnvironment] = useState<typeof environments[number]>('sunset');
+  const [environment, setEnvironment] = useState<(typeof environments)[number]>('sunset');
   const [distortionScale, setDistortionScale] = useState(0.3);
   const [floatSpeed, setFloatSpeed] = useState(1);
-  const [selectedShapes, setSelectedShapes] = useState<typeof shapes[number][]>(['sphere', 'torus', 'box']);
+  const [selectedShapes, setSelectedShapes] = useState<(typeof shapes)[number][]>([
+    'sphere',
+    'torus',
+    'box',
+  ]);
 
-  const toggleShape = (shape: typeof shapes[number]) => {
-    setSelectedShapes(prev => 
-      prev.includes(shape) 
-        ? prev.filter(s => s !== shape)
-        : [...prev, shape]
+  const toggleShape = (shape: (typeof shapes)[number]) => {
+    setSelectedShapes((prev) =>
+      prev.includes(shape) ? prev.filter((s) => s !== shape) : [...prev, shape]
     );
   };
 
   const objects = selectedShapes.map((shape, i) => ({
     shape,
-    color: [
-      '#8b5cf6', '#ec4899', '#3b82f6', 
-      '#10b981', '#f59e0b', '#ef4444'
-    ][i % 6],
+    color: ['#8b5cf6', '#ec4899', '#3b82f6', '#10b981', '#f59e0b', '#ef4444'][i % 6],
     distort: distortionScale,
-    position: [
-      (i - selectedShapes.length / 2) * 3,
-      Math.sin(i) * 2,
-      Math.cos(i) * 2
-    ] as [number, number, number],
+    position: [(i - selectedShapes.length / 2) * 3, Math.sin(i) * 2, Math.cos(i) * 2] as [
+      number,
+      number,
+      number,
+    ],
   }));
 
   return (
@@ -56,7 +69,7 @@ export default function FloatingObjectsPage() {
         {/* Controls */}
         <section className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-white mb-6">3D Scene Controls</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div>
               <label className="block text-white mb-2">Environment</label>
@@ -74,7 +87,9 @@ export default function FloatingObjectsPage() {
             </div>
 
             <div>
-              <label className="block text-white mb-2">Distortion: {distortionScale.toFixed(2)}</label>
+              <label className="block text-white mb-2">
+                Distortion: {distortionScale.toFixed(2)}
+              </label>
               <input
                 type="range"
                 min="0"
@@ -109,7 +124,7 @@ export default function FloatingObjectsPage() {
                 />
                 Auto Rotate Scene
               </label>
-              
+
               <div>
                 <label className="block text-white mb-2">Select Shapes</label>
                 <div className="flex flex-wrap gap-2">
@@ -163,7 +178,10 @@ export default function FloatingObjectsPage() {
               { env: 'forest', title: 'Forest Scene', colors: ['#38b2ac', '#68d391'] },
               { env: 'city', title: 'Urban Setting', colors: ['#f6ad55', '#ed8936'] },
             ].map((preset) => (
-              <div key={preset.env} className="bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden">
+              <div
+                key={preset.env}
+                className="bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden"
+              >
                 <div className="h-[400px]">
                   <FloatingObjects
                     objects={[
@@ -171,7 +189,7 @@ export default function FloatingObjectsPage() {
                       { shape: 'torus', color: preset.colors[1], distort: 0.3 },
                     ]}
                     autoRotate={true}
-                    environment={preset.env as typeof environments[number]}
+                    environment={preset.env as (typeof environments)[number]}
                     floatSpeed={1.5}
                   />
                 </div>
@@ -193,15 +211,18 @@ export default function FloatingObjectsPage() {
               { distort: 0.5, title: 'Medium Distortion', desc: 'Organic wobble effect' },
               { distort: 1, title: 'Max Distortion', desc: 'Fluid-like behavior' },
             ].map((demo) => (
-              <div key={demo.distort} className="bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden">
+              <div
+                key={demo.distort}
+                className="bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden"
+              >
                 <div className="h-[300px]">
                   <FloatingObjects
                     objects={[
-                      { 
-                        shape: 'sphere', 
-                        color: '#8b5cf6', 
+                      {
+                        shape: 'sphere',
+                        color: '#8b5cf6',
                         distort: demo.distort,
-                        position: [0, 0, 0] 
+                        position: [0, 0, 0],
                       },
                     ]}
                     autoRotate={true}

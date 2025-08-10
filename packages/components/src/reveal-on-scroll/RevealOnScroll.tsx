@@ -1,10 +1,10 @@
-import { ReactNode, useRef, useState, useEffect } from 'react';
-import { motion, Variants, useInView, useAnimation } from 'framer-motion';
+import { useGsapContext } from '@tuel/gsap';
+import { fadeInUpVariants } from '@tuel/motion';
+import { cn, isClient } from '@tuel/utils';
+import { motion, useAnimation, useInView, Variants } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGsapContext } from '@tuel/gsap';
-import { cn, isClient } from '@tuel/utils';
-import { fadeInUpVariants } from '@tuel/motion';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 
 if (isClient) {
   gsap.registerPlugin(ScrollTrigger);
@@ -53,7 +53,7 @@ export function RevealOnScroll({
   // Framer Motion approach
   useEffect(() => {
     if (engine !== 'framer' || disabled) return;
-    
+
     if (inView && (!triggerOnce || !hasRevealed)) {
       controls.start('visible');
       setHasRevealed(true);
@@ -69,10 +69,21 @@ export function RevealOnScroll({
 
     const getInitialTransform = () => {
       switch (direction) {
-        case 'up': return { y: distance, opacity: 0 };
-        case 'down': return { y: -distance, opacity: 0 };
-        case 'left': return { x: distance, opacity: 0 };
-        case 'right': return { x: -distance, opacity: 0 };
+        case 'up': {
+          return { y: distance, opacity: 0 };
+        }
+        case 'down': {
+          return { y: -distance, opacity: 0 };
+        }
+        case 'left': {
+          return { x: distance, opacity: 0 };
+        }
+        case 'right': {
+          return { x: -distance, opacity: 0 };
+        }
+        default: {
+          return { opacity: 0 };
+        }
       }
     };
 
@@ -98,13 +109,15 @@ export function RevealOnScroll({
             },
           });
         },
-        onLeaveBack: !triggerOnce ? () => {
-          gsap.to(gsapRef.current, {
-            ...getInitialTransform(),
-            duration: duration * 0.5,
-            ease: 'power2.in',
-          });
-        } : undefined,
+        onLeaveBack: !triggerOnce
+          ? () => {
+              gsap.to(gsapRef.current, {
+                ...getInitialTransform(),
+                duration: duration * 0.5,
+                ease: 'power2.in',
+              });
+            }
+          : undefined,
       },
     });
 
