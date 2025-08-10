@@ -1,10 +1,10 @@
 'use client';
 
 import { Carousel } from '@tuel/components';
-import { useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 
-const variants = ['fade', 'slide', '3d', 'stack', 'coverflow', 'wheel'] as const;
+const variants = ['fade', 'slide', '3d', 'stack', 'coverflow'] as const;
 
 const slides = [
   {
@@ -65,7 +65,7 @@ const slides = [
 ];
 
 export default function CarouselPage() {
-  const [variant, setVariant] = useState<typeof variants[number]>('slide');
+  const [variant, setVariant] = useState<(typeof variants)[number]>('slide');
   const [autoPlay, setAutoPlay] = useState(true);
   const [loop, setLoop] = useState(true);
   const [showIndicators, setShowIndicators] = useState(true);
@@ -93,7 +93,7 @@ export default function CarouselPage() {
         {/* Controls */}
         <section className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-white mb-6">Carousel Controls</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div>
               <label className="block text-white mb-2">Variant</label>
@@ -124,7 +124,9 @@ export default function CarouselPage() {
             </div>
 
             <div>
-              <label className="block text-white mb-2">Auto Play Interval: {autoPlayInterval}ms</label>
+              <label className="block text-white mb-2">
+                Auto Play Interval: {autoPlayInterval}ms
+              </label>
               <input
                 type="range"
                 min="1000"
@@ -197,7 +199,6 @@ export default function CarouselPage() {
               loop={loop}
               showIndicators={showIndicators}
               showArrows={showArrows}
-              duration={duration}
               className="h-full"
             />
           </div>
@@ -206,7 +207,7 @@ export default function CarouselPage() {
         {/* All Variants Showcase */}
         <section className="space-y-24">
           <h2 className="text-3xl font-bold text-white mb-8">All Carousel Variants</h2>
-          
+
           {variants.map((v) => (
             <div key={v} className="space-y-4">
               <h3 className="text-2xl font-bold text-purple-300">{v.toUpperCase()} Variant</h3>
@@ -218,7 +219,6 @@ export default function CarouselPage() {
                   loop={true}
                   showIndicators={true}
                   showArrows={true}
-                  duration={0.5}
                   className="h-full"
                 />
               </div>
@@ -228,7 +228,6 @@ export default function CarouselPage() {
                 {v === '3d' && '3D perspective transformation'}
                 {v === 'stack' && 'Cards stack behind each other'}
                 {v === 'coverflow' && 'Apple-style coverflow effect'}
-                {v === 'wheel' && 'Rotating wheel animation'}
               </p>
             </div>
           ))}
@@ -283,7 +282,6 @@ export default function CarouselPage() {
               loop={true}
               showIndicators={true}
               showArrows={true}
-              duration={0.8}
               className="h-full"
             />
           </div>
@@ -353,7 +351,6 @@ export default function CarouselPage() {
               loop={true}
               showIndicators={true}
               showArrows={false}
-              duration={1}
               className="h-[300px]"
             />
           </div>

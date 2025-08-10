@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 export default function ScrollMinimapPage() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -56,7 +56,7 @@ export default function ScrollMinimapPage() {
   const scrollToSection = (index: number) => {
     sectionsRef.current[index]?.scrollIntoView({
       behavior: 'smooth',
-      block: 'start'
+      block: 'start',
     });
   };
 
@@ -87,7 +87,7 @@ export default function ScrollMinimapPage() {
                   }`}
                   style={{
                     top: `${(index / (sections.length - 1)) * 100}%`,
-                    transform: 'translate(-50%, -50%)'
+                    transform: 'translate(-50%, -50%)',
                   }}
                   title={section.title}
                 />
@@ -117,22 +117,21 @@ export default function ScrollMinimapPage() {
       )}
 
       <div className="container mx-auto px-4 py-8">
-        <Link
-          href="/"
-          className="inline-flex items-center text-blue-400 hover:text-blue-300 mb-8"
-        >
+        <Link href="/" className="inline-flex items-center text-blue-400 hover:text-blue-300 mb-8">
           ← Back to Home
         </Link>
 
         {/* Introduction Section */}
         <div
-          ref={(el) => el && (sectionsRef.current[0] = el)}
+          ref={(el) => {
+            if (el) sectionsRef.current[0] = el;
+          }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h1 className="text-6xl font-bold mb-6">Scroll Minimap</h1>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl">
-            Navigate long content with an intuitive minimap that shows your current position
-            and allows quick jumps to different sections.
+            Navigate long content with an intuitive minimap that shows your current position and
+            allows quick jumps to different sections.
           </p>
 
           {/* Controls */}
@@ -179,9 +178,7 @@ export default function ScrollMinimapPage() {
 
               <div className="flex items-center justify-between">
                 <span>Progress</span>
-                <span className="text-blue-400 font-mono">
-                  {Math.round(scrollProgress * 100)}%
-                </span>
+                <span className="text-blue-400 font-mono">{Math.round(scrollProgress * 100)}%</span>
               </div>
             </div>
           </div>
@@ -189,7 +186,7 @@ export default function ScrollMinimapPage() {
 
         {/* Features Section */}
         <div
-          ref={(el) => el && (sectionsRef.current[1] = el)}
+          ref={(el) => { if (el) sectionsRef.current[1] = el; }}
           className="min-h-screen flex flex-col justify-center"
         >
           <div className="max-w-4xl">
@@ -228,7 +225,7 @@ export default function ScrollMinimapPage() {
 
         {/* Interactive Demo Section */}
         <div
-          ref={(el) => el && (sectionsRef.current[2] = el)}
+          ref={(el) => { if (el) sectionsRef.current[2] = el; }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h2 className="text-5xl font-bold mb-8 text-purple-400">Interactive Demo</h2>
@@ -252,9 +249,9 @@ export default function ScrollMinimapPage() {
                     <div key={i} className="p-4 bg-gray-700 rounded">
                       <h4 className="font-semibold mb-2">Content Block {i + 1}</h4>
                       <p className="text-gray-300 text-sm">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation.
                       </p>
                     </div>
                   ))}
@@ -290,7 +287,7 @@ export default function ScrollMinimapPage() {
 
         {/* Usage Examples Section */}
         <div
-          ref={(el) => el && (sectionsRef.current[3] = el)}
+          ref={(el) => { if (el) sectionsRef.current[3] = el; }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h2 className="text-5xl font-bold mb-8 text-orange-400">Usage Examples</h2>
@@ -298,7 +295,7 @@ export default function ScrollMinimapPage() {
           <div className="bg-gray-900 p-6 rounded-lg">
             <h3 className="text-xl font-semibold mb-4">Basic Implementation</h3>
             <pre className="text-sm text-gray-300 overflow-x-auto">
-{`import { ScrollMinimap } from '@tuel/components';
+              {`import { ScrollMinimap } from '@tuel/components';
 
 const sections = [
   { id: 'intro', title: 'Introduction', color: 'bg-blue-500' },
@@ -328,7 +325,7 @@ export default function MyPage() {
 
         {/* API Reference Section */}
         <div
-          ref={(el) => el && (sectionsRef.current[4] = el)}
+          ref={(el) => { if (el) sectionsRef.current[4] = el; }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h2 className="text-5xl font-bold mb-8 text-red-400">API Reference</h2>
@@ -375,30 +372,24 @@ export default function MyPage() {
 
         {/* Performance Section */}
         <div
-          ref={(el) => el && (sectionsRef.current[5] = el)}
+          ref={(el) => { if (el) sectionsRef.current[5] = el; }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h2 className="text-5xl font-bold mb-8 text-yellow-400">Performance</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-yellow-400 mb-2">
-                <60fps
-              </div>
+              <div className="text-4xl font-bold text-yellow-400 mb-2">60fps</div>
               <div className="text-gray-300">Smooth scroll tracking</div>
             </div>
 
             <div className="text-center">
-              <div className="text-4xl font-bold text-yellow-400 mb-2">
-                <5KB
-              </div>
+              <div className="text-4xl font-bold text-yellow-400 mb-2">5KB</div>
               <div className="text-gray-300">Minified bundle size</div>
             </div>
 
             <div className="text-center">
-              <div className="text-4xl font-bold text-yellow-400 mb-2">
-                <1ms
-              </div>
+              <div className="text-4xl font-bold text-yellow-400 mb-2">1ms</div>
               <div className="text-gray-300">Scroll event processing</div>
             </div>
           </div>
@@ -417,7 +408,7 @@ export default function MyPage() {
 
         {/* Accessibility Section */}
         <div
-          ref={(el) => el && (sectionsRef.current[6] = el)}
+          ref={(el) => { if (el) sectionsRef.current[6] = el; }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h2 className="text-5xl font-bold mb-8 text-pink-400">Accessibility</h2>

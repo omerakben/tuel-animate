@@ -72,7 +72,7 @@ export default function SimpleTestPage() {
 
       {/* Text Animations */}
       <section className="py-20 px-8">
-        <RevealOnScroll animation="fade-up">
+        <RevealOnScroll direction="up">
           <AnimatedText
             text="Animated Text Demo"
             variant="split"
@@ -80,7 +80,7 @@ export default function SimpleTestPage() {
           />
         </RevealOnScroll>
 
-        <RevealOnScroll animation="fade-up" delay={0.2}>
+        <RevealOnScroll direction="up" delay={0.2}>
           <AnimatedText
             text="This text uses the wave animation"
             variant="wave"
@@ -117,7 +117,7 @@ export default function SimpleTestPage() {
 
       {/* Sticky Cards */}
       <section className="min-h-screen">
-        <StickyCards cards={stickyCards} variant="scale" spacing={100} />
+        <StickyCards cards={stickyCards} scaleEffect={true} spacing={100} />
       </section>
 
       {/* Image Gallery */}
@@ -135,21 +135,21 @@ export default function SimpleTestPage() {
       {/* Reveal on Scroll Examples */}
       <section className="py-20 px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <RevealOnScroll animation="fade-up">
+          <RevealOnScroll direction="up">
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h3 className="text-xl font-bold mb-2">Card 1</h3>
               <p>This card fades up on scroll</p>
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll animation="fade-up" delay={0.2}>
+          <RevealOnScroll direction="up" delay={0.2}>
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h3 className="text-xl font-bold mb-2">Card 2</h3>
               <p>This card has a delay</p>
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll animation="fade-up" delay={0.4}>
+          <RevealOnScroll direction="up" delay={0.4}>
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h3 className="text-xl font-bold mb-2">Card 3</h3>
               <p>This card has more delay</p>

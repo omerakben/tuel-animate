@@ -186,13 +186,23 @@ export default function TestPage() {
           backgroundImage="https://picsum.photos/1920/1080?random=hero"
           overlay={true}
           overlayOpacity={0.6}
-          parallax={true}
-          reveal="fade-up"
-          ctaButtons={[
-            { label: 'View Components', href: '#text-effects', variant: 'primary' },
-            { label: 'Documentation', href: '/docs', variant: 'secondary' },
-          ]}
-        />
+          variant="parallax"
+        >
+          <div className="flex gap-4 mt-8">
+            <a
+              href="#text-effects"
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              View Components
+            </a>
+            <a
+              href="/docs"
+              className="px-6 py-3 border border-white/30 text-white rounded-lg hover:bg-white/10 transition-colors"
+            >
+              Documentation
+            </a>
+          </div>
+        </HeroSection>
 
         {/* Infinite Marquee */}
         <div className="absolute bottom-0 left-0 right-0 bg-black/50 backdrop-blur py-4">
@@ -214,7 +224,7 @@ export default function TestPage() {
         id="text-effects"
         className="min-h-screen p-20 flex flex-col justify-center items-center space-y-16"
       >
-        <RevealOnScroll animation="fade-up">
+        <RevealOnScroll direction="up">
           <AnimatedText
             text="Amazing Text Animations"
             variant="split"
@@ -224,7 +234,7 @@ export default function TestPage() {
           />
         </RevealOnScroll>
 
-        <RevealOnScroll animation="fade-up" delay={0.2}>
+        <RevealOnScroll direction="up" delay={0.2}>
           <AnimatedText
             text="Scramble Effect Demo"
             variant="scramble"
@@ -233,7 +243,7 @@ export default function TestPage() {
           />
         </RevealOnScroll>
 
-        <RevealOnScroll animation="fade-up" delay={0.4}>
+        <RevealOnScroll direction="up" delay={0.4}>
           <AnimatedText
             text="Wave Animation Here"
             variant="wave"
@@ -258,7 +268,7 @@ export default function TestPage() {
 
       {/* Carousel Section */}
       <section id="carousel-section" className="min-h-screen p-20">
-        <RevealOnScroll animation="fade-up">
+        <RevealOnScroll direction="up">
           <h2 className="text-4xl font-bold mb-12 text-center">Advanced Carousel</h2>
         </RevealOnScroll>
 
@@ -276,7 +286,7 @@ export default function TestPage() {
 
       {/* Sticky Cards */}
       <section className="min-h-screen">
-        <StickyCards cards={stickyCards} variant="scale" spacing={100} />
+        <StickyCards cards={stickyCards} scaleEffect={true} spacing={100} />
       </section>
 
       {/* Particles Section */}
