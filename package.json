@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "packageManager": "pnpm@9.15.0",
   "scripts": {
-    "dev": "turbo run dev",
+    "dev": "pnpm build:deps && turbo run dev --filter='@tuel/components' --filter='@tuel/docs' --filter='@tuel/tailwind-preset' --parallel",
+    "dev:simple": "pnpm build:deps && pnpm --filter '@tuel/components' dev & pnpm --filter '@tuel/docs' dev",
     "build": "turbo run build",
+    "build:deps": "turbo run build --filter='@tuel/tokens' --filter='@tuel/utils' --filter='@tuel/gsap' --filter='@tuel/motion' --filter='@tuel/three'",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
     "lint": "turbo run lint",

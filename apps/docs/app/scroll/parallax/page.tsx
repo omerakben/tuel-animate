@@ -1,6 +1,6 @@
 'use client';
 
-import { ParallaxScroll, ParallaxLayer } from '@tuel/components';
+import { ParallaxLayer, ParallaxScroll } from '@tuel/components';
 import Link from 'next/link';
 
 export default function ParallaxPage() {
@@ -25,11 +25,11 @@ export default function ParallaxPage() {
         <section className="mb-24">
           <h2 className="text-3xl font-bold text-white mb-8">Basic Parallax Layers</h2>
           <div className="h-[600px] relative overflow-hidden rounded-2xl border border-white/20">
-            <ParallaxScroll>
+            <ParallaxScroll className="h-full">
               <ParallaxLayer speed={0.2} offset={0}>
                 <div className="absolute inset-0 bg-gradient-to-b from-purple-900 to-pink-900" />
               </ParallaxLayer>
-              
+
               <ParallaxLayer speed={0.5} offset={0.2}>
                 <div className="flex justify-center items-center h-full">
                   <div className="text-center">
@@ -92,9 +92,7 @@ export default function ParallaxPage() {
               {/* Main Content */}
               <ParallaxLayer speed={1} offset={0.3}>
                 <div className="flex flex-col justify-center items-center h-full px-6">
-                  <h1 className="text-7xl font-bold text-white mb-6 text-center">
-                    Parallax Hero
-                  </h1>
+                  <h1 className="text-7xl font-bold text-white mb-6 text-center">Parallax Hero</h1>
                   <p className="text-2xl text-gray-300 text-center max-w-2xl">
                     Create stunning depth effects with multiple scrolling layers
                   </p>
@@ -129,10 +127,13 @@ export default function ParallaxPage() {
               ].map((card, i) => (
                 <ParallaxLayer key={i} speed={card.speed} offset={card.offset}>
                   <div className="flex justify-center items-center h-full px-6">
-                    <div className={`bg-gradient-to-br ${card.color} rounded-2xl p-12 shadow-2xl max-w-md w-full`}>
+                    <div
+                      className={`bg-gradient-to-br ${card.color} rounded-2xl p-12 shadow-2xl max-w-md w-full`}
+                    >
                       <h3 className="text-4xl font-bold text-white mb-4">{card.title}</h3>
                       <p className="text-white/90">
-                        Layer {i + 1} scrolls at {card.speed}x speed creating a beautiful depth effect
+                        Layer {i + 1} scrolls at {card.speed}x speed creating a beautiful depth
+                        effect
                       </p>
                     </div>
                   </div>
