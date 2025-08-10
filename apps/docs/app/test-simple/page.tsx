@@ -1,16 +1,18 @@
 'use client';
 
-import { 
-  RevealOnScroll,
-  InfiniteMarquee,
-  AnimatedText,
-  StickyCards,
-  HeroSection,
-  PageTransition,
-  Carousel,
+import {
   AnimatedMenu,
-  ImageGallery
+  Carousel,
+  HeroSection,
+  ImageGallery,
+  InfiniteMarquee,
+  RevealOnScroll,
+  // AnimatedText, // Disabled due to React 19 compatibility
+  StickyCards,
 } from '@tuel/components';
+
+// Import mock components for React 19 compatibility
+import { AnimatedText } from '../../components/DisabledComponents';
 
 export default function SimpleTestPage() {
   const menuItems = [
@@ -20,30 +22,30 @@ export default function SimpleTestPage() {
   ];
 
   const carouselSlides = [
-    { 
-      id: '1', 
-      title: 'Slide 1', 
+    {
+      id: '1',
+      title: 'Slide 1',
       description: 'First slide',
-      content: <div className="p-8 bg-blue-500 rounded">Slide 1</div>
+      content: <div className="p-8 bg-blue-500 rounded">Slide 1</div>,
     },
-    { 
-      id: '2', 
-      title: 'Slide 2', 
+    {
+      id: '2',
+      title: 'Slide 2',
       description: 'Second slide',
-      content: <div className="p-8 bg-purple-500 rounded">Slide 2</div>
+      content: <div className="p-8 bg-purple-500 rounded">Slide 2</div>,
     },
   ];
 
   const stickyCards = [
-    { 
-      id: '1', 
+    {
+      id: '1',
       content: <div className="p-8 text-white">Card 1</div>,
-      backgroundColor: '#8b5cf6'
+      backgroundColor: '#8b5cf6',
     },
-    { 
-      id: '2', 
+    {
+      id: '2',
       content: <div className="p-8 text-white">Card 2</div>,
-      backgroundColor: '#3b82f6'
+      backgroundColor: '#3b82f6',
     },
   ];
 
@@ -115,11 +117,7 @@ export default function SimpleTestPage() {
 
       {/* Sticky Cards */}
       <section className="min-h-screen">
-        <StickyCards
-          cards={stickyCards}
-          variant="scale"
-          spacing={100}
-        />
+        <StickyCards cards={stickyCards} variant="scale" spacing={100} />
       </section>
 
       {/* Image Gallery */}

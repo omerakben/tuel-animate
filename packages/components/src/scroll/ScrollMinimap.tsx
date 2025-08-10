@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState } from 'react';
 import { cn } from '@tuel/utils';
+import { useEffect, useRef, useState } from 'react';
 
 export interface ScrollMinimapProps {
   className?: string;
@@ -40,14 +40,14 @@ export function ScrollMinimap({
   const [documentHeight, setDocumentHeight] = useState(0);
   const [isVisible, setIsVisible] = useState(!autoHide);
   const [activeSectionIndex, setActiveSectionIndex] = useState(-1);
-  const hideTimeoutRef = useRef<NodeJS.Timeout>();
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const updateMinimap = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight;
       const winHeight = window.innerHeight;
-      
+
       setDocumentHeight(docHeight);
       setViewportHeight(winHeight);
       setScrollProgress(scrollTop / (docHeight - winHeight));
@@ -70,7 +70,9 @@ export function ScrollMinimap({
       // Show minimap on scroll
       if (autoHide) {
         setIsVisible(true);
-        clearTimeout(hideTimeoutRef.current);
+        if (hideTimeoutRef.current) {
+          clearTimeout(hideTimeoutRef.current);
+        }
         hideTimeoutRef.current = setTimeout(() => {
           setIsVisible(false);
         }, hideDelay);
@@ -160,10 +162,8 @@ export function ScrollMinimap({
               style={{
                 top: sectionTop,
                 height: sectionHeight,
-                backgroundColor: 
-                  activeSectionIndex === index 
-                    ? activeColor 
-                    : section.color || trackColor,
+                backgroundColor:
+                  activeSectionIndex === index ? activeColor : section.color || trackColor,
                 opacity: activeSectionIndex === index ? 0.3 : 0.1,
               }}
               onClick={(e) => {
@@ -185,36 +185,35 @@ export function ScrollMinimap({
         />
 
         {/* Section Labels */}
-        {showLabels && sections.map((section, index) => {
-          const element = document.getElementById(section.id);
-          if (!element || !section.label) return null;
+        {showLabels &&
+          sections.map((section, index) => {
+            const element = document.getElementById(section.id);
+            if (!element || !section.label) return null;
 
-          const elementTop = element.offsetTop;
-          const sectionTop = (elementTop / documentHeight) * height;
+            const elementTop = element.offsetTop;
+            const sectionTop = (elementTop / documentHeight) * height;
 
-          return (
-            <div
-              key={`${section.id}-label`}
-              className={cn(
-                'absolute text-xs whitespace-nowrap transition-all duration-200',
-                position === 'right' ? 'right-full mr-2' : 'left-full ml-2',
-                activeSectionIndex === index ? 'opacity-100 font-bold' : 'opacity-50'
-              )}
-              style={{
-                top: sectionTop,
-                color: activeSectionIndex === index ? activeColor : 'inherit',
-              }}
-            >
-              {section.label}
-            </div>
-          );
-        })}
+            return (
+              <div
+                key={`${section.id}-label`}
+                className={cn(
+                  'absolute text-xs whitespace-nowrap transition-all duration-200',
+                  position === 'right' ? 'right-full mr-2' : 'left-full ml-2',
+                  activeSectionIndex === index ? 'opacity-100 font-bold' : 'opacity-50'
+                )}
+                style={{
+                  top: sectionTop,
+                  color: activeSectionIndex === index ? activeColor : 'inherit',
+                }}
+              >
+                {section.label}
+              </div>
+            );
+          })}
       </div>
 
       {/* Progress Indicator */}
-      <div className="mt-2 text-xs text-center opacity-50">
-        {Math.round(scrollProgress * 100)}%
-      </div>
+      <div className="mt-2 text-xs text-center opacity-50">{Math.round(scrollProgress * 100)}%</div>
     </div>
   );
 }

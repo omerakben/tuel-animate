@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useState } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { cn } from '@tuel/utils';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { ReactNode, useEffect, useState } from 'react';
 
 export interface PageRevealProps {
   children: ReactNode;
@@ -22,10 +22,10 @@ export function PageReveal({
   direction = 'up',
   duration = 1,
   delay = 0,
-  stagger = 0.1,
+  stagger: _stagger = 0.1,
   onComplete,
   trigger = true,
-  backgroundColor = 'bg-black',
+  backgroundColor: _backgroundColor = 'bg-black',
 }: PageRevealProps) {
   const [isRevealed, setIsRevealed] = useState(false);
 
@@ -38,7 +38,7 @@ export function PageReveal({
   // Get animation variants
   const getVariants = (): Variants => {
     switch (variant) {
-      case 'slide':
+      case 'slide': {
         const slideOffset = 100;
         const slideDirection = {
           up: { y: slideOffset },
@@ -69,6 +69,7 @@ export function PageReveal({
             },
           },
         };
+      }
 
       case 'scale':
         return {
@@ -135,7 +136,7 @@ export function PageReveal({
           },
         };
 
-      case 'clip':
+      case 'clip': {
         const clipDirection = {
           up: 'inset(100% 0 0 0)',
           down: 'inset(0 0 100% 0)',
@@ -158,6 +159,7 @@ export function PageReveal({
             clipPath: clipDirection[direction],
           },
         };
+      }
 
       case 'mask':
         return {

@@ -1,8 +1,8 @@
-import { ReactNode, useRef } from 'react';
-import { motion, useScroll, useTransform, Variants } from 'framer-motion';
-import { gsap } from 'gsap';
 import { useGsapContext } from '@tuel/gsap';
 import { cn, isClient } from '@tuel/utils';
+import { motion, useScroll, useTransform, Variants } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ReactNode, useRef } from 'react';
 
 export interface HeroSectionProps {
   title?: string | ReactNode;
@@ -17,7 +17,6 @@ export interface HeroSectionProps {
   overlay?: boolean;
   overlayOpacity?: number;
   scrollIndicator?: boolean;
-  onScrollComplete?: () => void;
 }
 
 export function HeroSection({
@@ -33,7 +32,6 @@ export function HeroSection({
   overlay = true,
   overlayOpacity = 0.5,
   scrollIndicator = true,
-  onScrollComplete,
 }: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -128,7 +126,7 @@ export function HeroSection({
   };
 
   // GSAP animations for complex effects
-  useGsapContext((ctx) => {
+  useGsapContext(() => {
     if (!isClient || variant !== 'split') return;
 
     const title = contentRef.current?.querySelector('.hero-title');
@@ -164,12 +162,7 @@ export function HeroSection({
       initial="hidden"
       animate="visible"
       variants={variants}
-      className={cn(
-        'relative overflow-hidden',
-        heightClass,
-        backgroundColor,
-        className
-      )}
+      className={cn('relative overflow-hidden', heightClass, backgroundColor, className)}
     >
       {/* Background Image */}
       {backgroundImage && (
@@ -177,11 +170,7 @@ export function HeroSection({
           style={variant === 'parallax' ? { y, scale } : {}}
           className="absolute inset-0 z-0"
         >
-          <img
-            src={backgroundImage}
-            alt=""
-            className="w-full h-full object-cover"
-          />
+          <img src={backgroundImage} alt="" className="w-full h-full object-cover" />
         </motion.div>
       )}
 
@@ -191,13 +180,7 @@ export function HeroSection({
           style={variant === 'parallax' ? { y, scale } : {}}
           className="absolute inset-0 z-0"
         >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
+          <video autoPlay muted loop playsInline className="w-full h-full object-cover">
             <source src={backgroundVideo} type="video/mp4" />
           </video>
         </motion.div>
@@ -205,10 +188,7 @@ export function HeroSection({
 
       {/* Overlay */}
       {overlay && (backgroundImage || backgroundVideo) && (
-        <div
-          className="absolute inset-0 z-10 bg-black"
-          style={{ opacity: overlayOpacity }}
-        />
+        <div className="absolute inset-0 z-10 bg-black" style={{ opacity: overlayOpacity }} />
       )}
 
       {/* Content */}
@@ -233,7 +213,7 @@ export function HeroSection({
               {title}
             </motion.h1>
           )}
-          
+
           {subtitle && (
             <motion.p
               className="hero-subtitle text-lg md:text-xl lg:text-2xl opacity-90"

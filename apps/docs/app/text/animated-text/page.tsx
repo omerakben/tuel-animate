@@ -1,19 +1,22 @@
 'use client';
 
-import { AnimatedText } from '@tuel/components';
-import { useState } from 'react';
+// import { AnimatedText } from '@tuel/components'; // Disabled due to React 19 compatibility
+
+// Import mock components for React 19 compatibility
 import Link from 'next/link';
+import { useState } from 'react';
+import { AnimatedText } from '../../../components/DisabledComponents';
 
 const variants = ['split', 'scramble', 'wave', 'typewriter', 'fade', 'slide', 'glitch'] as const;
 
 export default function AnimatedTextPage() {
-  const [variant, setVariant] = useState<typeof variants[number]>('split');
+  const [variant, setVariant] = useState<(typeof variants)[number]>('split');
   const [duration, setDuration] = useState(1);
   const [stagger, setStagger] = useState(0.05);
   const [replay, setReplay] = useState(0);
 
   const triggerReplay = () => {
-    setReplay(prev => prev + 1);
+    setReplay((prev) => prev + 1);
   };
 
   return (
@@ -36,7 +39,7 @@ export default function AnimatedTextPage() {
         {/* Controls */}
         <section className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-white mb-6">Animation Controls</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>
               <label className="block text-white mb-2">Variant</label>
@@ -178,7 +181,8 @@ export default function AnimatedTextPage() {
                 splitBy="words"
                 className="text-4xl font-bold text-white leading-relaxed"
               >
-                Each word appears one by one creating a dramatic entrance effect perfect for headlines
+                Each word appears one by one creating a dramatic entrance effect perfect for
+                headlines
               </AnimatedText>
             </div>
           </div>
@@ -253,24 +257,21 @@ export default function AnimatedTextPage() {
           <div>
             <h2 className="text-3xl font-bold text-white mb-8">Scramble Reveal</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                'SECRET_KEY_2024',
-                'ENCRYPTED_DATA',
-                'SECURE_TOKEN_XYZ',
-                'PRIVATE_ACCESS',
-              ].map((text, i) => (
-                <div key={i} className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
-                  <AnimatedText
-                    key={`scramble-${i}-${replay}`}
-                    variant="scramble"
-                    duration={2}
-                    delay={i * 0.3}
-                    className="text-2xl font-mono text-cyan-400"
-                  >
-                    {text}
-                  </AnimatedText>
-                </div>
-              ))}
+              {['SECRET_KEY_2024', 'ENCRYPTED_DATA', 'SECURE_TOKEN_XYZ', 'PRIVATE_ACCESS'].map(
+                (text, i) => (
+                  <div key={i} className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
+                    <AnimatedText
+                      key={`scramble-${i}-${replay}`}
+                      variant="scramble"
+                      duration={2}
+                      delay={i * 0.3}
+                      className="text-2xl font-mono text-cyan-400"
+                    >
+                      {text}
+                    </AnimatedText>
+                  </div>
+                )
+              )}
             </div>
           </div>
 

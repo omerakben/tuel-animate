@@ -1,9 +1,9 @@
-import { Canvas, CanvasProps } from '@react-three/fiber';
 import { Preload } from '@react-three/drei';
-import { ReactNode } from 'react';
+import { Canvas, CanvasProps } from '@react-three/fiber';
+import { type ReactNode } from 'react';
 
 interface R3FCanvasProps extends CanvasProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function R3FCanvas({ children, ...props }: R3FCanvasProps) {

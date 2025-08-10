@@ -1,8 +1,6 @@
-import { useState, useRef, ReactNode } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { gsap } from 'gsap';
-import { useGsapContext } from '@tuel/gsap';
 import { cn } from '@tuel/utils';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { ReactNode, useRef, useState } from 'react';
 
 export interface MenuItem {
   id: string;
@@ -44,22 +42,22 @@ export function AnimatedMenu({
     switch (variant) {
       case 'overlay':
         return {
-          hidden: { 
+          hidden: {
             clipPath: 'circle(0% at 50% 50%)',
             opacity: 0,
           },
-          visible: { 
+          visible: {
             clipPath: 'circle(150% at 50% 50%)',
             opacity: 1,
             transition: { duration: animationDuration, ease: 'easeInOut' },
           },
-          exit: { 
+          exit: {
             clipPath: 'circle(0% at 50% 50%)',
             opacity: 0,
             transition: { duration: animationDuration, ease: 'easeInOut' },
           },
         };
-      case 'push':
+      case 'push': {
         const pushDirection = {
           left: { x: '-100%' },
           right: { x: '100%' },
@@ -68,8 +66,8 @@ export function AnimatedMenu({
         };
         return {
           hidden: pushDirection[position],
-          visible: { 
-            x: 0, 
+          visible: {
+            x: 0,
             y: 0,
             transition: { duration: animationDuration, ease: 'easeOut' },
           },
@@ -78,18 +76,19 @@ export function AnimatedMenu({
             transition: { duration: animationDuration, ease: 'easeIn' },
           },
         };
+      }
       case 'morph':
         return {
-          hidden: { 
+          hidden: {
             scale: 0,
             borderRadius: '50%',
           },
-          visible: { 
+          visible: {
             scale: 1,
             borderRadius: '0%',
             transition: { duration: animationDuration, ease: 'easeOut' },
           },
-          exit: { 
+          exit: {
             scale: 0,
             borderRadius: '50%',
             transition: { duration: animationDuration, ease: 'easeIn' },
@@ -97,19 +96,20 @@ export function AnimatedMenu({
         };
       case 'circular':
         return {
-          hidden: { 
+          hidden: {
             clipPath: `circle(0% at ${position === 'right' ? '100% 0%' : '0% 0%'})`,
           },
-          visible: { 
+          visible: {
             clipPath: 'circle(150% at 50% 50%)',
             transition: { duration: animationDuration, ease: 'easeOut' },
           },
-          exit: { 
+          exit: {
             clipPath: `circle(0% at ${position === 'right' ? '100% 0%' : '0% 0%'})`,
             transition: { duration: animationDuration, ease: 'easeIn' },
           },
         };
-      default: // slide
+      default: {
+        // slide
         const slideDirection = {
           left: { x: '-100%' },
           right: { x: '100%' },
@@ -118,8 +118,8 @@ export function AnimatedMenu({
         };
         return {
           hidden: slideDirection[position],
-          visible: { 
-            x: 0, 
+          visible: {
+            x: 0,
             y: 0,
             transition: { duration: animationDuration, type: 'spring', damping: 20 },
           },
@@ -128,13 +128,14 @@ export function AnimatedMenu({
             transition: { duration: animationDuration / 2 },
           },
         };
+      }
     }
   };
 
   // Item variants
   const itemVariants: Variants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       x: position === 'left' ? -50 : position === 'right' ? 50 : 0,
       y: position === 'top' ? -50 : position === 'bottom' ? 50 : 0,
     },
@@ -174,11 +175,7 @@ export function AnimatedMenu({
   return (
     <>
       {/* Trigger */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="relative z-50"
-        aria-label="Toggle menu"
-      >
+      <button onClick={() => setIsOpen(!isOpen)} className="relative z-50" aria-label="Toggle menu">
         {triggerElement || (
           <div className="space-y-1.5 p-2">
             <motion.span
@@ -249,7 +246,7 @@ export function AnimatedMenu({
                           {item.label}
                         </span>
                       </a>
-                      
+
                       {/* Sub-items */}
                       {item.subItems && (
                         <div className="ml-8 mt-2 space-y-2">

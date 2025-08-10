@@ -43,3 +43,7 @@ pnpm-debug.log*
 # Changesets
 .changeset/*.md
 !.changeset/config.json
+
+#Personal
+.claude/
+/CLAUDE.md

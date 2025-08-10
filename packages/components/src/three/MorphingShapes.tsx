@@ -1,8 +1,8 @@
-import { useRef, useMemo, useState, useEffect } from 'react';
-import * as THREE from 'three';
+import { MeshWobbleMaterial, OrbitControls } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, MeshWobbleMaterial } from '@react-three/drei';
 import { cn } from '@tuel/utils';
+import { useMemo, useRef, useState } from 'react';
+import * as THREE from 'three';
 
 interface MorphingMeshProps {
   position?: [number, number, number];
@@ -32,11 +32,11 @@ function MorphingMesh({
   const meshRef = useRef<THREE.Mesh>(null);
   const [currentTarget, setCurrentTarget] = useState(0);
   const morphProgress = useRef(0);
-  
+
   // Create geometries for morphing
   const geometries = useMemo(() => {
     const geos: THREE.BufferGeometry[] = [];
-    
+
     morphTargets.forEach((target) => {
       let geo: THREE.BufferGeometry;
       switch (target) {
@@ -66,51 +66,51 @@ function MorphingMesh({
       }
       geos.push(geo);
     });
-    
+
     return geos;
   }, [morphTargets]);
-  
+
   // Create base geometry with morph targets
   const geometry = useMemo(() => {
     if (geometries.length === 0) return null;
-    
+
     const baseGeo = geometries[0].clone();
     const positionAttribute = baseGeo.getAttribute('position');
     const vertexCount = positionAttribute.count;
-    
+
     // Create morph attributes
     const morphPositions: THREE.Float32BufferAttribute[] = [];
-    
+
     for (let i = 1; i < geometries.length; i++) {
       const targetGeo = geometries[i];
       const targetPos = targetGeo.getAttribute('position');
-      
+
       // Ensure same vertex count
       if (targetPos.count !== vertexCount) {
         console.warn('Morph target vertex count mismatch');
         continue;
       }
-      
+
       morphPositions.push(targetPos.clone() as THREE.Float32BufferAttribute);
     }
-    
+
     baseGeo.morphAttributes.position = morphPositions;
-    
+
     return baseGeo;
   }, [geometries]);
-  
+
   // Handle morphing animation
   useFrame((state) => {
     if (!meshRef.current || !geometry) return;
-    
+
     // Update morph progress
     morphProgress.current += morphSpeed * 0.01;
-    
+
     if (morphProgress.current >= 1) {
       morphProgress.current = 0;
       setCurrentTarget((prev) => (prev + 1) % geometries.length);
     }
-    
+
     // Apply morph targets
     const morphInfluences = meshRef.current.morphTargetInfluences;
     if (morphInfluences) {
@@ -118,20 +118,20 @@ function MorphingMesh({
       for (let i = 0; i < morphInfluences.length; i++) {
         morphInfluences[i] = 0;
       }
-      
+
       // Set current morph influence
       if (currentTarget < morphInfluences.length) {
         morphInfluences[currentTarget] = morphProgress.current;
       }
     }
-    
+
     // Rotation
     meshRef.current.rotation.x = state.clock.elapsedTime * 0.2;
     meshRef.current.rotation.y = state.clock.elapsedTime * 0.3;
   });
-  
+
   if (!geometry) return null;
-  
+
   return (
     <mesh
       ref={meshRef}
@@ -208,22 +208,19 @@ export function MorphingShapes({
         style={{ background: backgroundColor }}
       >
         {fog && <fog attach="fog" args={[fogColor, fogNear, fogFar]} />}
-        
+
         <ambientLight intensity={ambientLightIntensity} />
-        <pointLight
-          position={pointLightPosition}
-          intensity={pointLightIntensity}
-        />
+        <pointLight position={pointLightPosition} intensity={pointLightIntensity} />
         <pointLight
           position={[-pointLightPosition[0], -pointLightPosition[1], -pointLightPosition[2]]}
           intensity={pointLightIntensity * 0.5}
           color="#ff6b6b"
         />
-        
+
         {shapes.map((shape, index) => (
           <MorphingMesh key={index} {...shape} />
         ))}
-        
+
         {enableOrbitControls && (
           <OrbitControls
             enablePan={false}

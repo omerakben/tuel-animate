@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect, ReactNode } from 'react';
-import { motion, AnimatePresence, PanInfo } from 'framer-motion';
-import { gsap } from 'gsap';
-import { Draggable } from 'gsap/Draggable';
 import { useGsapContext } from '@tuel/gsap';
 import { cn, isClient } from '@tuel/utils';
+import { AnimatePresence, motion, PanInfo } from 'framer-motion';
+import { gsap } from 'gsap';
+import { Draggable } from 'gsap/Draggable';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 if (isClient) {
   gsap.registerPlugin(Draggable);
@@ -44,30 +44,30 @@ export function Carousel({
   showArrows = true,
   draggable = true,
   direction = 'horizontal',
-  slidesPerView = 1,
-  spacing = 0,
   onSlideChange,
 }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const slidesRef = useRef<HTMLDivElement[]>([]);
-  const autoPlayRef = useRef<NodeJS.Timeout>();
+  const autoPlayRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
   // Handle slide change
-  const goToSlide = (index: number) => {
-    let newIndex = index;
-    
-    if (loop) {
-      if (index < 0) newIndex = slides.length - 1;
-      else if (index >= slides.length) newIndex = 0;
-    } else {
-      newIndex = Math.max(0, Math.min(slides.length - 1, index));
-    }
-    
-    setCurrentIndex(newIndex);
-    onSlideChange?.(newIndex);
-  };
+  const goToSlide = useCallback(
+    (index: number) => {
+      let newIndex = index;
+
+      if (loop) {
+        if (index < 0) newIndex = slides.length - 1;
+        else if (index >= slides.length) newIndex = 0;
+      } else {
+        newIndex = Math.max(0, Math.min(slides.length - 1, index));
+      }
+
+      setCurrentIndex(newIndex);
+      onSlideChange?.(newIndex);
+    },
+    [loop, slides.length, onSlideChange]
+  );
 
   // Auto play
   useEffect(() => {
@@ -76,20 +76,20 @@ export function Carousel({
         goToSlide(currentIndex + 1);
       }, autoPlayInterval);
     }
-    
+
     return () => {
       if (autoPlayRef.current) {
         clearInterval(autoPlayRef.current);
       }
     };
-  }, [currentIndex, autoPlay, autoPlayInterval, isDragging]);
+  }, [currentIndex, autoPlay, autoPlayInterval, isDragging, goToSlide]);
 
   // Drag handlers
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const threshold = 50;
     const velocity = direction === 'horizontal' ? info.velocity.x : info.velocity.y;
     const offset = direction === 'horizontal' ? info.offset.x : info.offset.y;
-    
+
     if (Math.abs(offset) > threshold || Math.abs(velocity) > 500) {
       if (offset > 0) {
         goToSlide(currentIndex - 1);
@@ -97,7 +97,7 @@ export function Carousel({
         goToSlide(currentIndex + 1);
       }
     }
-    
+
     setIsDragging(false);
   };
 
@@ -180,40 +180,43 @@ export function Carousel({
   const custom = currentIndex;
 
   // GSAP Draggable setup
-  useGsapContext((ctx) => {
-    if (!draggable || !isClient || variant === '3d') return;
-    
-    const container = containerRef.current;
-    if (!container) return;
-    
-    Draggable.create(container, {
-      type: direction === 'horizontal' ? 'x' : 'y',
-      inertia: true,
-      bounds: container.parentElement,
-      onDragStart: () => setIsDragging(true),
-      onDragEnd: function() {
-        const distance = direction === 'horizontal' ? this.x : this.y;
-        const threshold = 100;
-        
-        if (Math.abs(distance) > threshold) {
-          if (distance > 0) {
-            goToSlide(currentIndex - 1);
-          } else {
-            goToSlide(currentIndex + 1);
+  useGsapContext(
+    (_ctx) => {
+      if (!draggable || !isClient || variant === '3d') return;
+
+      const container = containerRef.current;
+      if (!container) return;
+
+      Draggable.create(container, {
+        type: direction === 'horizontal' ? 'x' : 'y',
+        inertia: true,
+        bounds: container.parentElement,
+        onDragStart: () => setIsDragging(true),
+        onDragEnd: function () {
+          const distance = direction === 'horizontal' ? this.x : this.y;
+          const threshold = 100;
+
+          if (Math.abs(distance) > threshold) {
+            if (distance > 0) {
+              goToSlide(currentIndex - 1);
+            } else {
+              goToSlide(currentIndex + 1);
+            }
           }
-        }
-        
-        gsap.to(container, {
-          x: 0,
-          y: 0,
-          duration: 0.3,
-          ease: 'power2.out',
-        });
-        
-        setIsDragging(false);
-      },
-    });
-  }, [draggable, direction, variant, currentIndex]);
+
+          gsap.to(container, {
+            x: 0,
+            y: 0,
+            duration: 0.3,
+            ease: 'power2.out',
+          });
+
+          setIsDragging(false);
+        },
+      });
+    },
+    [draggable, direction, variant, currentIndex]
+  );
 
   return (
     <div className={cn('relative overflow-hidden', className)}>
@@ -241,7 +244,8 @@ export function Carousel({
             onDragEnd={handleDragEnd}
             className="w-full h-full"
             style={{
-              transformStyle: variant === '3d' || variant === 'coverflow' ? 'preserve-3d' : undefined,
+              transformStyle:
+                variant === '3d' || variant === 'coverflow' ? 'preserve-3d' : undefined,
             }}
           >
             {/* Slide Content */}
@@ -278,7 +282,12 @@ export function Carousel({
             aria-label="Previous slide"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </button>
           <button
@@ -302,9 +311,7 @@ export function Carousel({
               onClick={() => goToSlide(index)}
               className={cn(
                 'w-2 h-2 rounded-full transition-all',
-                index === currentIndex
-                  ? 'w-8 bg-white'
-                  : 'bg-white/50 hover:bg-white/70'
+                index === currentIndex ? 'w-8 bg-white' : 'bg-white/50 hover:bg-white/70'
               )}
               aria-label={`Go to slide ${index + 1}`}
             />

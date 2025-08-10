@@ -1,8 +1,6 @@
-import { useState, useRef, ReactNode } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { gsap } from 'gsap';
-import { useGsapContext } from '@tuel/gsap';
 import { cn, isClient } from '@tuel/utils';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useRef, useState } from 'react';
 
 export interface GalleryImage {
   id: string;
@@ -110,7 +108,7 @@ export function ImageGallery({
       duration: 0.3,
       ease: 'power2.out',
     });
-    
+
     gsap.to(item, {
       rotationY: 0,
       rotationX: 0,
@@ -120,7 +118,7 @@ export function ImageGallery({
   };
 
   // Layout styles
-  const getLayoutStyles = () => {
+  const getLayoutStyles = (): React.CSSProperties => {
     switch (layout) {
       case 'masonry':
         return {
@@ -133,7 +131,7 @@ export function ImageGallery({
         return {
           display: 'flex',
           gap: `${gap}px`,
-          overflowX: 'auto',
+          overflowX: 'auto' as const,
         };
       case 'stack':
         return {
@@ -152,11 +150,7 @@ export function ImageGallery({
 
   return (
     <>
-      <div
-        ref={galleryRef}
-        className={cn('relative', className)}
-        style={getLayoutStyles()}
-      >
+      <div ref={galleryRef} className={cn('relative', className)} style={getLayoutStyles()}>
         {images.map((image, index) => (
           <motion.div
             key={image.id}
@@ -181,11 +175,7 @@ export function ImageGallery({
               onClick?.(image, index);
             }}
           >
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="w-full h-full object-cover"
-            />
+            <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
             {hoverEffect === 'overlay' && (
               <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
                 <div className="text-white opacity-0 hover:opacity-100 transition-opacity p-4">

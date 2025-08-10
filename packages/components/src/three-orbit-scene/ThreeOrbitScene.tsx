@@ -1,8 +1,8 @@
-import { Suspense, useRef, ReactNode } from 'react';
-import { OrbitControls, PerspectiveCamera, Environment, Preload } from '@react-three/drei';
-import { Group } from 'three';
+import { Environment, OrbitControls, PerspectiveCamera, Preload } from '@react-three/drei';
 import { ClientOnly, R3FCanvas } from '@tuel/three';
 import { cn } from '@tuel/utils';
+import { ReactNode, Suspense, useRef } from 'react';
+import { Group } from 'three';
 
 export interface ThreeOrbitSceneProps {
   children: ReactNode;
@@ -14,7 +14,17 @@ export interface ThreeOrbitSceneProps {
   enableRotate?: boolean;
   autoRotate?: boolean;
   autoRotateSpeed?: number;
-  environment?: 'sunset' | 'dawn' | 'night' | 'warehouse' | 'forest' | 'apartment' | 'studio' | 'city' | 'park' | 'lobby';
+  environment?:
+    | 'sunset'
+    | 'dawn'
+    | 'night'
+    | 'warehouse'
+    | 'forest'
+    | 'apartment'
+    | 'studio'
+    | 'city'
+    | 'park'
+    | 'lobby';
   environmentIntensity?: number;
   fallback?: ReactNode;
   onLoad?: () => void;
@@ -38,12 +48,10 @@ function OrbitSceneContent({
 
   return (
     <R3FCanvas shadows={shadows} onCreated={onLoad}>
-      <PerspectiveCamera
-        makeDefault
-        position={cameraPosition}
-        fov={cameraFov}
-      />
-      
+      {/* @ts-expect-error - React 19 compatibility with Three.js types */}
+      <PerspectiveCamera makeDefault position={cameraPosition} fov={cameraFov} />
+
+      {/* @ts-expect-error - React 19 compatibility with Three.js types */}
       <OrbitControls
         enableZoom={enableZoom}
         enablePan={enablePan}
@@ -52,11 +60,9 @@ function OrbitSceneContent({
         autoRotateSpeed={autoRotateSpeed}
         makeDefault
       />
-      
-      <Environment
-        preset={environment}
-      />
-      
+
+      <Environment preset={environment} />
+
       <ambientLight intensity={0.5} />
       <directionalLight
         position={[10, 10, 5]}
@@ -65,13 +71,11 @@ function OrbitSceneContent({
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
       />
-      
+
       <Suspense fallback={null}>
-        <group ref={groupRef}>
-          {children}
-        </group>
+        <group ref={groupRef as any}>{children}</group>
       </Suspense>
-      
+
       <Preload all />
     </R3FCanvas>
   );
