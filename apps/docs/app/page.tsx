@@ -31,6 +31,16 @@ const testPages = [
         title: 'Scroll Minimap',
         description: 'Navigation minimap with scroll progress',
       },
+      {
+        href: '/examples/nvg8-scroll',
+        title: 'NVG8 Scroll Animation',
+        description: 'Advanced text animation with split and reveal effects',
+      },
+      {
+        href: '/examples/mat-voyce-scroll',
+        title: 'Mat Voyce Scroll',
+        description: 'Creative studio layout with scroll-triggered image reveal',
+      },
     ],
   },
   {

@@ -1,5 +1,9 @@
 export { KarimSaabScroll } from './components/KarimSaabScroll';
+export { MatVoyceScroll } from './components/MatVoyceScroll';
+export { NVG8Scroll } from './components/NVG8Scroll';
 export { OrchestraCubes } from './components/OrchestraCubes';
+export { TelescopeImageScroll } from './components/TelescopeImageScroll';
+export { TelescopeScroll } from './components/TelescopeScroll';
 export { useGsapContext } from './hooks/useGsapContext';
 export { useIsomorphicLayoutEffect } from './hooks/useIsomorphicLayoutEffect';
 export { useScopedAnimation } from './hooks/useScopedAnimation';

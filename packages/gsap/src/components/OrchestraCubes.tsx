@@ -166,9 +166,7 @@ export const OrchestraCubes: React.FC<OrchestraCubesProps> = ({ className = '' }
 
     cubeFaces.forEach((face) => {
       const img = document.createElement('img');
-      img.src = `https://images.unsplash.com/photo-${
-        1500000000000 + imageCounter * 100000
-      }?w=150&h=150&fit=crop&crop=center`;
+      img.src = `/api/placeholder/150/150`;
       img.alt = `Cube face image ${imageCounter}`;
       img.style.width = '100%';
       img.style.height = '100%';

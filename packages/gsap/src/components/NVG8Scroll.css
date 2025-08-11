@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap');
+
+.nvg8-scroll * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nvg8-scroll {
+  font-family: 'Host Grotesk', sans-serif;
+  height: 800vh;
+}
+
+.nvg8-scroll img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nvg8-scroll h1 {
+  font-size: 7vw;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.nvg8-scroll p {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.nvg8-scroll section {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #141414;
+  color: #e3e3db;
+  overflow: hidden;
+}
+
+.nvg8-hero {
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+}
+
+.nvg8-hero-header {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  will-change: transform, opacity;
+}
+
+.nvg8-animated-icons {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  will-change: transform;
+  z-index: 2;
+}
+
+.nvg8-animated-icon {
+  flex: 1;
+  aspect-ratio: 1;
+  will-change: transform;
+}
+
+.nvg8-animated-text {
+  position: relative;
+  max-width: 1000px;
+  text-align: center;
+  color: #141414;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.nvg8-animated-text .text-segment {
+  opacity: 0;
+}
+
+.nvg8-animated-text .placeholder-icon {
+  margin-top: -10px;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  vertical-align: middle;
+  will-change: transform;
+  visibility: hidden;
+}
+
+.nvg8-scroll .duplicate-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nvg8-scroll .duplicate-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nvg8-outro {
+  background-color: #e3e3db;
+  color: #141414;
+}
+
+@media (max-width: 1000px) {
+  .nvg8-scroll h1 {
+    font-size: 12vw;
+    text-align: center;
+  }
+
+  .nvg8-scroll p {
+    font-size: 1.1rem;
+  }
+
+  .nvg8-hero-header {
+    top: 45%;
+    width: 100%;
+  }
+
+  .nvg8-animated-text .placeholder-icon {
+    margin-top: -4px;
+    width: 30px;
+    height: 30px;
+  }
+}

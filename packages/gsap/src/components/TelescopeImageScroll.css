@@ -1,0 +1,109 @@
+/* TelescopeImageScroll.css */
+
+.telescope-image-scroll {
+  font-family: 'Instrument Serif', sans-serif;
+}
+
+.telescope-image-scroll h1 {
+  font-size: 4rem;
+  line-height: 1.1;
+}
+
+.telescope-image-scroll section {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  background-color: #e3e3db;
+  color: #141414;
+  overflow: hidden;
+}
+
+.telescope-image-scroll .hero,
+.telescope-image-scroll .outro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.telescope-image-scroll .hero h1,
+.telescope-image-scroll .outro h1 {
+  width: 50%;
+  text-align: center;
+}
+
+.telescope-image-scroll .banner-img-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.telescope-image-scroll .banner-img-container .img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.telescope-image-scroll .banner-img-container .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.telescope-image-scroll .banner-img-container .img.mask {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='200' r='150' fill='black'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='200' r='150' fill='black'/%3E%3C/svg%3E");
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.telescope-image-scroll .banner-header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  text-align: center;
+  color: #e3e3db;
+  z-index: 2;
+}
+
+.telescope-image-scroll .banner-intro-text-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.telescope-image-scroll .banner-intro-text {
+  flex: 1;
+  position: relative;
+  will-change: transform;
+}
+
+.telescope-image-scroll .banner-intro-text:nth-child(1) {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.telescope-image-scroll .banner-intro-text h1 {
+  font-size: 4rem;
+  line-height: 1.1;
+}
+
+@media (max-width: 1000px) {
+  .telescope-image-scroll .hero h1,
+  .telescope-image-scroll .outro h1,
+  .telescope-image-scroll .banner-header {
+    width: calc(100% - 4rem);
+  }
+}
