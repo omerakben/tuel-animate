@@ -1,12 +1,30 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
-  disconnect() {}
-  observe() {}
-  unobserve() {}
-  takeRecords() {
+  root: Element | Document | null = null;
+  rootMargin: string = '';
+  thresholds: ReadonlyArray<number> = [];
+
+  constructor(_callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
+    this.root = options?.root || null;
+    this.rootMargin = options?.rootMargin || '';
+    this.thresholds = Array.isArray(options?.threshold)
+      ? options.threshold
+      : [options?.threshold || 0];
+  }
+
+  observe(): void {
+    // Mock implementation
+  }
+  unobserve(): void {
+    // Mock implementation
+  }
+  disconnect(): void {
+    // Mock implementation
+  }
+  takeRecords(): IntersectionObserverEntry[] {
     return [];
   }
 };
@@ -16,10 +34,10 @@ global.requestAnimationFrame = (cb) => setTimeout(cb, 0) as any;
 global.cancelAnimationFrame = (id) => clearTimeout(id);
 
 // Mock GSAP ScrollTrigger
-jest.mock('gsap/ScrollTrigger', () => ({
+vi.mock('gsap/ScrollTrigger', () => ({
   ScrollTrigger: {
-    create: jest.fn(),
-    refresh: jest.fn(),
-    kill: jest.fn(),
+    create: vi.fn(),
+    refresh: vi.fn(),
+    kill: vi.fn(),
   },
 }));

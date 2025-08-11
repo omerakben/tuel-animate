@@ -1,7 +1,7 @@
-import { useRef, useMemo } from 'react';
-import * as THREE from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { cn } from '@tuel/utils';
+import { useMemo, useRef } from 'react';
+import * as THREE from 'three';
 
 const vertexShader = `
   uniform float uTime;
@@ -11,22 +11,22 @@ const vertexShader = `
   attribute float aRandom;
   varying vec3 vPosition;
   varying float vDistance;
-  
+
   void main() {
     vPosition = position;
     vec3 pos = position;
-    
+
     // Create wave effect
     float wave = sin(pos.x * uWaveFrequency + uTime * uWaveSpeed) * uWaveAmplitude;
     wave += sin(pos.z * uWaveFrequency * 0.8 + uTime * uWaveSpeed * 0.7) * uWaveAmplitude * 0.5;
     pos.y += wave;
-    
+
     // Add some randomness
     pos.y += sin(uTime * 2.0 + aRandom * 10.0) * 0.1;
-    
+
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
     vDistance = -mvPosition.z;
-    
+
     gl_Position = projectionMatrix * mvPosition;
     gl_PointSize = (30.0 / vDistance) * (1.0 + aRandom);
   }
@@ -38,28 +38,27 @@ const fragmentShader = `
   uniform float uTime;
   varying vec3 vPosition;
   varying float vDistance;
-  
+
   void main() {
     // Create circular particles
     vec2 center = gl_PointCoord - 0.5;
     float dist = length(center);
     if (dist > 0.5) discard;
-    
+
     // Color gradient based on position and time
     float mixFactor = (vPosition.y + 2.0) / 4.0 + sin(uTime * 0.5) * 0.2;
     vec3 color = mix(uColor1, uColor2, mixFactor);
-    
+
     // Fade based on distance
     float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
     alpha *= 1.0 - smoothstep(10.0, 20.0, vDistance);
-    
+
     gl_FragColor = vec4(color, alpha);
   }
 `;
 
 interface WaveParticlesProps {
   count?: number;
-  size?: number;
   color1?: string;
   color2?: string;
   waveAmplitude?: number;
@@ -70,7 +69,6 @@ interface WaveParticlesProps {
 
 function WaveParticles({
   count = 10000,
-  size = 4,
   color1 = '#8b5cf6',
   color2 = '#3b82f6',
   waveAmplitude = 1,
@@ -125,8 +123,15 @@ function WaveParticles({
           count={count}
           array={positions}
           itemSize={3}
+          args={[positions, 3]}
         />
-        <bufferAttribute attach="attributes-aRandom" count={count} array={randoms} itemSize={1} />
+        <bufferAttribute
+          attach="attributes-aRandom"
+          count={count}
+          array={randoms}
+          itemSize={1}
+          args={[randoms, 1]}
+        />
       </bufferGeometry>
       <shaderMaterial
         uniforms={uniforms}
@@ -143,7 +148,6 @@ function WaveParticles({
 export interface ParticleWaveProps {
   className?: string;
   particleCount?: number;
-  particleSize?: number;
   color1?: string;
   color2?: string;
   waveAmplitude?: number;
@@ -156,13 +160,11 @@ export interface ParticleWaveProps {
   fogNear?: number;
   fogFar?: number;
   cameraPosition?: [number, number, number];
-  autoRotate?: boolean;
 }
 
 export function ParticleWave({
   className,
   particleCount = 10000,
-  particleSize = 4,
   color1 = '#8b5cf6',
   color2 = '#3b82f6',
   waveAmplitude = 1,
@@ -175,7 +177,6 @@ export function ParticleWave({
   fogNear = 5,
   fogFar = 20,
   cameraPosition = [0, 0, 10],
-  autoRotate = true,
 }: ParticleWaveProps) {
   return (
     <div className={cn('w-full h-full', className)}>
@@ -187,7 +188,6 @@ export function ParticleWave({
 
         <WaveParticles
           count={particleCount}
-          size={particleSize}
           color1={color1}
           color2={color2}
           waveAmplitude={waveAmplitude}

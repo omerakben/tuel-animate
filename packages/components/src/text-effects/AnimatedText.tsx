@@ -1,9 +1,9 @@
-import { useRef, useEffect, ReactNode } from 'react';
-import { motion, Variants, useInView } from 'motion/react';
+import { useGsapContext } from '@tuel/gsap';
+import { cn, isClient } from '@tuel/utils';
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
-import { useGsapContext, useIsomorphicLayoutEffect } from '@tuel/gsap';
-import { cn, isClient } from '@tuel/utils';
+import { motion, useInView, Variants } from 'motion/react';
+import { useEffect, useRef } from 'react';
 
 if (isClient) {
   gsap.registerPlugin(SplitText);
@@ -102,101 +102,97 @@ export function AnimatedText({
   };
 
   // GSAP animations for more complex effects
-  useGsapContext(
-    (ctx) => {
-      if (!isClient || !textRef.current) return;
+  useGsapContext(() => {
+    if (!isClient || !textRef.current) return;
 
-      if (variant === 'split' || variant === 'explode' || variant === 'scramble') {
-        // Create SplitText instance
-        splitRef.current = new SplitText(textRef.current, {
-          type: splitType,
-          linesClass: 'split-line',
-          wordsClass: 'split-word',
-          charsClass: 'split-char',
+    if (variant === 'split' || variant === 'explode' || variant === 'scramble') {
+      // Create SplitText instance
+      splitRef.current = new SplitText(textRef.current, {
+        type: splitType,
+        linesClass: 'split-line',
+        wordsClass: 'split-word',
+        charsClass: 'split-char',
+      });
+
+      const elements = splitRef.current[splitType];
+
+      if (variant === 'split') {
+        gsap.set(elements, { opacity: 0, y: 50, rotateX: -90 });
+
+        const tl = gsap.timeline({
+          delay,
+          onComplete: () => {
+            if (splitRef.current) {
+              splitRef.current.revert();
+            }
+          },
         });
 
-        const elements = splitRef.current[splitType];
+        tl.to(elements, {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          duration,
+          stagger: staggerDelay,
+          ease: 'back.out(1.7)',
+        });
 
-        if (variant === 'split') {
-          gsap.set(elements, { opacity: 0, y: 50, rotateX: -90 });
-
-          const tl = gsap.timeline({
-            delay,
-            onComplete: () => {
-              if (splitRef.current) {
-                splitRef.current.revert();
-              }
-            },
-          });
-
-          tl.to(elements, {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            duration,
-            stagger: staggerDelay,
-            ease: 'back.out(1.7)',
-          });
-
-          if (triggerOnScroll && !isInView) {
-            tl.pause();
-          }
-        } else if (variant === 'explode') {
-          gsap.set(elements, { opacity: 0, scale: 0 });
-
-          const tl = gsap.timeline({ delay });
-
-          tl.to(elements, {
-            opacity: 1,
-            scale: 1,
-            duration,
-            stagger: {
-              amount: 0.5,
-              from: 'center',
-              grid: 'auto',
-            },
-            ease: 'elastic.out(1, 0.5)',
-          });
-
-          if (triggerOnScroll && !isInView) {
-            tl.pause();
-          }
-        } else if (variant === 'scramble') {
-          const originalText = children;
-          const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-
-          elements.forEach((el: HTMLElement, i: number) => {
-            const originalChar = el.textContent || '';
-            let scrambleCount = 0;
-            const maxScrambles = 10;
-
-            const scrambleInterval = setInterval(() => {
-              if (scrambleCount < maxScrambles) {
-                el.textContent = chars[Math.floor(Math.random() * chars.length)];
-                scrambleCount++;
-              } else {
-                el.textContent = originalChar;
-                clearInterval(scrambleInterval);
-              }
-            }, 50);
-          });
+        if (triggerOnScroll && !isInView) {
+          tl.pause();
         }
+      } else if (variant === 'explode') {
+        gsap.set(elements, { opacity: 0, scale: 0 });
+
+        const tl = gsap.timeline({ delay });
+
+        tl.to(elements, {
+          opacity: 1,
+          scale: 1,
+          duration,
+          stagger: {
+            amount: 0.5,
+            from: 'center',
+            grid: 'auto',
+          },
+          ease: 'elastic.out(1, 0.5)',
+        });
+
+        if (triggerOnScroll && !isInView) {
+          tl.pause();
+        }
+      } else if (variant === 'scramble') {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+
+        elements.forEach((el: Element) => {
+          const htmlEl = el as HTMLElement;
+          const originalChar = htmlEl.textContent || '';
+          let scrambleCount = 0;
+          const maxScrambles = 10;
+
+          const scrambleInterval = setInterval(() => {
+            if (scrambleCount < maxScrambles) {
+              htmlEl.textContent = chars[Math.floor(Math.random() * chars.length)];
+              scrambleCount++;
+            } else {
+              el.textContent = originalChar;
+              clearInterval(scrambleInterval);
+            }
+          }, 50);
+        });
       }
+    }
 
-      return () => {
-        if (splitRef.current) {
-          splitRef.current.revert();
-        }
-      };
-    },
-    [variant, splitType, duration, staggerDelay, delay, isInView, triggerOnScroll]
-  );
+    return () => {
+      if (splitRef.current) {
+        splitRef.current.revert();
+      }
+    };
+  }, [variant, splitType, duration, staggerDelay, delay, isInView, triggerOnScroll]);
 
   // Trigger animation on scroll
   useEffect(() => {
     if (triggerOnScroll && isInView && splitRef.current) {
       const tl = gsap.timeline();
-      const elements = splitRef.current[splitType];
 
       if (variant === 'split' || variant === 'explode') {
         tl.play();
@@ -236,9 +232,10 @@ export function AnimatedText({
   }
 
   // For GSAP animations
+  const DynamicComponent = Component as any;
   return (
-    <Component ref={textRef as any} className={cn('overflow-hidden', className)}>
+    <DynamicComponent ref={textRef} className={cn('overflow-hidden', className)}>
       {children}
-    </Component>
+    </DynamicComponent>
   );
 }

@@ -1,8 +1,8 @@
-import { useRef, useMemo } from 'react';
-import * as THREE from 'three';
+import { ContactShadows, Environment, Float, MeshDistortMaterial } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Environment, ContactShadows, MeshDistortMaterial } from '@react-three/drei';
 import { cn } from '@tuel/utils';
+import { useMemo, useRef } from 'react';
+import * as THREE from 'three';
 
 export interface FloatingObjectProps {
   position?: [number, number, number];
@@ -53,7 +53,7 @@ function FloatingObject({
     }
   }, [shape]);
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!meshRef.current) return;
     meshRef.current.rotation.x += 0.001 * rotationSpeed;
     meshRef.current.rotation.y += 0.002 * rotationSpeed;
@@ -107,8 +107,6 @@ export interface FloatingObjectsProps {
     | 'lobby';
   ambientIntensity?: number;
   cameraPosition?: [number, number, number];
-  autoRotate?: boolean;
-  autoRotateSpeed?: number;
 }
 
 export function FloatingObjects({
@@ -127,8 +125,6 @@ export function FloatingObjects({
   environment = 'sunset',
   ambientIntensity = 0.5,
   cameraPosition = [0, 0, 5],
-  autoRotate = true,
-  autoRotateSpeed = 0.5,
 }: FloatingObjectsProps) {
   return (
     <div className={cn('w-full h-full', className)}>

@@ -48,10 +48,8 @@ function OrbitSceneContent({
 
   return (
     <R3FCanvas shadows={shadows} onCreated={onLoad}>
-      {/* @ts-expect-error - React 19 compatibility with Three.js types */}
       <PerspectiveCamera makeDefault position={cameraPosition} fov={cameraFov} />
 
-      {/* @ts-expect-error - React 19 compatibility with Three.js types */}
       <OrbitControls
         enableZoom={enableZoom}
         enablePan={enablePan}
