@@ -9,6 +9,51 @@ export type { InfiniteMarqueeProps } from './infinite-marquee/InfiniteMarquee';
 // export { ThreeOrbitScene, ExampleOrbitBox } from './three-orbit-scene/ThreeOrbitScene';
 // export type { ThreeOrbitSceneProps } from './three-orbit-scene/ThreeOrbitScene';
 
+// 3D/WebGL components - RE-ENABLED AFTER FIXES
+export { FloatingObjects } from './three/FloatingObjects';
+export type { FloatingObjectProps, FloatingObjectsProps } from './three/FloatingObjects';
+
+export { ParticleWave } from './three/ParticleWave';
+export type { ParticleWaveProps } from './three/ParticleWave';
+
+// NEW COMPONENTS - Phase 2 Implementation
+export { ThreeGLTFScene } from './three/ThreeGLTFScene';
+export type { ThreeGLTFSceneProps } from './three/ThreeGLTFScene';
+
+export { GarageScene } from './three/GarageScene';
+export type { GarageSceneProps } from './three/GarageScene';
+
+export { ThreeSlider } from './three/ThreeSlider';
+export type { ThreeSliderProps } from './three/ThreeSlider';
+
+export { CylindricalGallery } from './three/CylindricalGallery';
+export type { CylindricalGalleryProps } from './three/CylindricalGallery';
+
+export { VideoGallery } from './three/VideoGallery';
+export type { VideoGalleryProps } from './three/VideoGallery';
+
+export { CielroseSlider } from './three/CielroseSlider';
+export type { CielroseSliderProps, Slide } from './three/CielroseSlider';
+
+export { AshfallGallery } from './three/AshfallGallery';
+export type { AshfallGalleryProps } from './three/AshfallGallery';
+
+export { OrchestraCubes } from './scroll/OrchestraCubes';
+export type { OrchestraCubesProps } from './scroll/OrchestraCubes';
+
+export { HorizontalScroll, HorizontalScrollItem } from './scroll/HorizontalScroll';
+export type { HorizontalScrollItemProps, HorizontalScrollProps } from './scroll/HorizontalScroll';
+
+export { TextExplosion } from './text-effects/TextExplosion';
+export type { TextExplosionProps } from './text-effects/TextExplosion';
+
+export {
+  useViewTransition,
+  ViewPageTransition,
+  ViewTransition,
+} from './transitions/ViewTransition';
+export type { ViewPageTransitionProps, ViewTransitionProps } from './transitions/ViewTransition';
+
 // Scroll components
 export { ScrollFrameAnimation } from './scroll/ScrollFrameAnimation';
 export type { ScrollFrameAnimationProps } from './scroll/ScrollFrameAnimation';
@@ -80,7 +125,7 @@ export type { Wave, WaveCanvasProps } from './canvas/WaveCanvas';
 // export { NoiseField } from './canvas/NoiseField';
 // export type { NoiseFieldProps } from './canvas/NoiseField';
 
-// 3D/WebGL components
+// 3D/WebGL components - COMMENTED OUT
 // export { PhantomGallery } from './three/PhantomGallery';
 // export type { GalleryItem, PhantomGalleryProps } from './three/PhantomGallery';
 

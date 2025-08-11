@@ -82,6 +82,31 @@ const testPages = [
         description: 'Basic Three.js scene with orbit controls',
       },
       {
+        href: '/three/garage-scene',
+        title: '3D Garage Scene',
+        description: 'Cyberpunk garage with bloom effects',
+      },
+      {
+        href: '/three/slider',
+        title: '3D Slider',
+        description: 'Curved 3D slider with scroll-driven textures',
+      },
+      {
+        href: '/three/cylindrical-gallery',
+        title: '3D Cylindrical Gallery',
+        description: 'Circular image gallery with curved planes',
+      },
+      {
+        href: '/demos/video-gallery',
+        title: '3D Video Gallery',
+        description: 'Interactive video gallery with curved arrangement',
+      },
+      {
+        href: '/demos/orchestra-cubes',
+        title: 'Orchestra 3D Cubes',
+        description: 'Scroll-driven 3D cube animation with orchestrated movement',
+      },
+      {
         href: '/three/phantom-gallery',
         title: 'Phantom Gallery',
         description: 'WebGL shader-based infinite gallery',

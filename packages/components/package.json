@@ -25,11 +25,13 @@
     "clean": "rm -rf dist .turbo coverage"
   },
   "dependencies": {
+    "@react-three/postprocessing": "^3.0.4",
     "@tuel/gsap": "workspace:*",
     "@tuel/motion": "workspace:*",
     "@tuel/three": "workspace:*",
     "@tuel/tokens": "workspace:*",
     "@tuel/utils": "workspace:*",
+    "matter-js": "^0.20.0",
     "motion": "^12.23.12"
   },
   "peerDependencies": {
@@ -44,6 +46,7 @@
     "@react-three/drei": "^10.6.1",
     "@react-three/fiber": "^9.3.0",
     "@testing-library/react": "^14.1.2",
+    "@types/matter-js": "^0.20.0",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
     "@types/three": "^0.179.0",

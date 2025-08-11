@@ -4,7 +4,11 @@ import {
   AnimatedMenu,
   // UI Components
   Carousel,
+  // New Phase 2 Components
+  FloatingObjects,
   HeroSection,
+  HorizontalScroll,
+  HorizontalScrollItem,
   HoverDistortion,
   ImageGallery,
   ImageTrail,
@@ -15,21 +19,18 @@ import {
   ParallaxScroll,
   // Canvas Components
   ParticleField,
+  ParticleWave,
   RevealOnScroll,
   StickyCards,
+  TextExplosion,
+  ViewTransition,
   WaveCanvas,
 } from '@tuel/components';
 import dynamic from 'next/dynamic';
 import { Suspense, useState } from 'react';
 
 // Import mock components for React 19 compatibility
-import {
-  AnimatedText,
-  FloatingObjects,
-  MorphingShapes,
-  NoiseField,
-  ParticleWave,
-} from '../../components/DisabledComponents';
+import { AnimatedText, MorphingShapes, NoiseField } from '../../components/DisabledComponents';
 
 // Lazy load heavy 3D components and SSR-incompatible components
 // const FloatingObjects = dynamic(
@@ -443,6 +444,72 @@ export default function TestPage() {
               />
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Phase 2 Components - New Additions */}
+      <section id="phase-2" className="min-h-screen py-20">
+        <h2 className="text-4xl font-bold text-center mb-12">Phase 2 Components</h2>
+
+        {/* Text Explosion */}
+        <div className="mb-20">
+          <h3 className="text-2xl font-bold text-center mb-8">Text Explosion (Matter.js)</h3>
+          <div className="h-96 border border-gray-300 rounded-lg overflow-hidden">
+            <TextExplosion
+              text="CLICK ME!"
+              trigger="click"
+              fontSize={48}
+              fontWeight="bold"
+              color="#8b5cf6"
+              explosionForce={0.15}
+              gravity={0.8}
+            />
+          </div>
+        </div>
+
+        {/* Horizontal Scroll */}
+        <div className="mb-20">
+          <h3 className="text-2xl font-bold text-center mb-8">Horizontal Scroll</h3>
+          <div className="h-96">
+            <HorizontalScroll
+              containerClassName="h-full"
+              className="h-full"
+              speed={1.2}
+              pin={true}
+              scrub={1}
+            >
+              {Array.from({ length: 8 }, (_, i) => (
+                <HorizontalScrollItem key={i} width={400} className="h-full">
+                  <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-purple-500 to-blue-500 text-white text-4xl font-bold mx-4 rounded-lg">
+                    Panel {i + 1}
+                  </div>
+                </HorizontalScrollItem>
+              ))}
+            </HorizontalScroll>
+          </div>
+        </div>
+
+        {/* View Transitions */}
+        <div className="mb-20">
+          <h3 className="text-2xl font-bold text-center mb-8">View Transitions</h3>
+          <div className="flex gap-4 justify-center">
+            <ViewTransition
+              name="demo-card-1"
+              fallbackAnimation="fade"
+              className="p-8 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-lg"
+            >
+              <h4 className="text-xl font-bold">Fade Transition</h4>
+              <p>Native view transition with fade fallback</p>
+            </ViewTransition>
+            <ViewTransition
+              name="demo-card-2"
+              fallbackAnimation="slide"
+              className="p-8 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg"
+            >
+              <h4 className="text-xl font-bold">Slide Transition</h4>
+              <p>Native view transition with slide fallback</p>
+            </ViewTransition>
+          </div>
         </div>
       </section>
 
