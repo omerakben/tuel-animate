@@ -1,3 +1,2 @@
-export * from './ScrollFrameAnimation';
-export * from './ParallaxScroll';
-export * from './ScrollMinimap';
+export { default as OrkenWorldScroll } from './OrkenWorldScroll';
+export { default as TheFirstTheLastScroll } from './TheFirstTheLastScroll';

@@ -23,6 +23,16 @@ export default function HomePage() {
       description: '3D cube animations and interactions',
     },
     {
+      href: '/orken-world-scroll',
+      title: 'Orken World Scroll',
+      description: 'Canvas-based triangle grid scroll animation',
+    },
+    {
+      href: '/thefirstthelast-scroll',
+      title: 'TheFirstTheLast Scroll',
+      description: 'Stacked card reveal scroll animation',
+    },
+    {
       href: '/telescope-image-scroll',
       title: 'Telescope Image Scroll',
       description: 'Image-based scroll animations',

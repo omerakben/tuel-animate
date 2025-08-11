@@ -30,8 +30,8 @@
 - ✅ `cg-telescope-img-scroll-animation-nextjs` - Next.js image scroll effects → **MIGRATED** to `TelescopeImageScroll` component
 - ✅ `cg-nvg8-scroll-animation` - Complex scroll sequences → **MIGRATED** to `NVG8Scroll` component
 - ✅ `cg-mat-voyce-scroll-animation` - Scroll-triggered animations → **MIGRATED** to `MatVoyceScroll` component
-- `cg-orken-world-scroll-animation` - World scroll effects
-- `cg-thefirstthelast-scroll-animation` - Scroll reveal animations
+- ✅ `cg-orken-world-scroll-animation` - World scroll effects → **MIGRATED** to `OrkenWorldScroll` component
+- ✅ `cg-thefirstthelast-scroll-animation` - Scroll reveal animations → **MIGRATED** to `TheFirstTheLastScroll` component
 - `cg-sofihealth-product-scroll-animation` - Product scroll effects
 - `cg-wodniack-work-section-scroll` - Work section scroll
 - `cg-radga-horizontal-scroll-animation` - Horizontal scrolling

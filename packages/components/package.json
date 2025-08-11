@@ -10,6 +10,11 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
+    "./scroll": {
+      "types": "./dist/scroll/index.d.ts",
+      "import": "./dist/scroll/index.mjs",
+      "require": "./dist/scroll/index.js"
+    },
     "./styles.css": "./dist/styles.css"
   },
   "files": [
