@@ -1,4 +1,6 @@
-import { MatVoyceScroll } from '@tuel-animate/gsap';
+'use client';
+
+import { MatVoyceScroll } from '@tuel/gsap';
 
 export default function MatVoyceScrollDemo() {
   const customTitles = [

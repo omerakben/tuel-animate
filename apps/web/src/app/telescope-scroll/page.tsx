@@ -1,4 +1,6 @@
-import { TelescopeScroll } from '@tuel-animate/gsap';
+'use client';
+
+import { TelescopeScroll } from '@tuel/gsap';
 
 export default function TelescopeScrollDemo() {
   const customSpotlightItems = [

@@ -1,4 +1,6 @@
-import { TelescopeImageScroll } from '@tuel-animate/gsap';
+'use client';
+
+import { TelescopeImageScroll } from '@tuel/gsap';
 
 export default function TelescopeImageScrollDemo() {
   return (

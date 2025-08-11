@@ -1,4 +1,6 @@
-import { KarimSaabScroll } from '@tuel-animate/gsap';
+'use client';
+
+import { KarimSaabScroll } from '@tuel/gsap';
 
 export default function KarimSaabScrollDemo() {
   const customImages = [

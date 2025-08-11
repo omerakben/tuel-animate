@@ -31,16 +31,6 @@ const testPages = [
         title: 'Scroll Minimap',
         description: 'Navigation minimap with scroll progress',
       },
-      {
-        href: '/examples/nvg8-scroll',
-        title: 'NVG8 Scroll Animation',
-        description: 'Advanced text animation with split and reveal effects',
-      },
-      {
-        href: '/examples/mat-voyce-scroll',
-        title: 'Mat Voyce Scroll',
-        description: 'Creative studio layout with scroll-triggered image reveal',
-      },
     ],
   },
   {
@@ -105,16 +95,6 @@ const testPages = [
         href: '/three/cylindrical-gallery',
         title: '3D Cylindrical Gallery',
         description: 'Circular image gallery with curved planes',
-      },
-      {
-        href: '/demos/video-gallery',
-        title: '3D Video Gallery',
-        description: 'Interactive video gallery with curved arrangement',
-      },
-      {
-        href: '/demos/orchestra-cubes',
-        title: 'Orchestra 3D Cubes',
-        description: 'Scroll-driven 3D cube animation with orchestrated movement',
       },
       {
         href: '/three/phantom-gallery',
@@ -205,9 +185,46 @@ export default function HomePage() {
           <h1 className="text-6xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
             Tuel Animate Components
           </h1>
-          <p className="text-xl text-gray-300">
-            Comprehensive test suite for all animation components
+          <p className="text-xl text-gray-300 mb-8">
+            Developer Playground & Component Documentation
           </p>
+
+          {/* Two-App Architecture Explanation */}
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-12 max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold text-white mb-4">🏗️ Two-App Architecture</h2>
+            <div className="grid md:grid-cols-2 gap-6 text-left">
+              <div className="bg-blue-500/20 rounded-lg p-4">
+                <h3 className="font-bold text-blue-300 mb-2">📚 This App (localhost:3001)</h3>
+                <p className="text-gray-300 text-sm mb-2">Developer Playground</p>
+                <ul className="text-gray-400 text-sm space-y-1">
+                  <li>• Component documentation & API refs</li>
+                  <li>• Copy-paste code examples</li>
+                  <li>• Technical implementation guides</li>
+                  <li>• Component testing playground</li>
+                </ul>
+              </div>
+              <div className="bg-purple-500/20 rounded-lg p-4">
+                <h3 className="font-bold text-purple-300 mb-2">🎨 Web App (localhost:3002)</h3>
+                <p className="text-gray-300 text-sm mb-2">Polished Demo Showcase</p>
+                <ul className="text-gray-400 text-sm space-y-1">
+                  <li>• Production-ready animation demos</li>
+                  <li>• Client presentation quality</li>
+                  <li>• Portfolio-worthy showcases</li>
+                  <li>• Real-world implementations</li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-4 p-3 bg-green-500/20 rounded-lg">
+              <p className="text-green-300 text-sm">
+                💡 <strong>For Developers:</strong> Use this app to learn and implement components.
+                <strong>For Clients:</strong> Visit{' '}
+                <a href="http://localhost:3002" className="underline hover:text-white">
+                  localhost:3002
+                </a>{' '}
+                for polished demos.
+              </p>
+            </div>
+          </div>
         </header>
 
         <div className="grid gap-12">

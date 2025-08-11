@@ -1,4 +1,6 @@
-import { NVG8Scroll } from '@tuel-animate/gsap';
+'use client';
+
+import { NVG8Scroll } from '@tuel/gsap';
 
 export default function NVG8ScrollDemo() {
   const customIcons = [
