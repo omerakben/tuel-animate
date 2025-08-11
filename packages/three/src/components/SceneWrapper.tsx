@@ -7,11 +7,7 @@ interface SceneWrapperProps {
   lights?: boolean;
 }
 
-export function SceneWrapper({ 
-  children, 
-  orbitControls = true,
-  lights = true 
-}: SceneWrapperProps) {
+export function SceneWrapper({ children, orbitControls = true, lights = true }: SceneWrapperProps) {
   return (
     <>
       {lights && (

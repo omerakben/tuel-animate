@@ -49,8 +49,8 @@ This script performs a faster cleanup for quick iteration:
 
 ## Performance Comparison
 
-| Script                 | Time     | Dependencies    | Build Outputs    | Cache                | Use Case               |
-| ---------------------- | -------- | --------------- | ---------------- | -------------------- | ---------------------- |
+| Script                 | Time     | Dependencies     | Build Outputs     | Cache                 | Use Case               |
+| ---------------------- | -------- | ---------------- | ----------------- | --------------------- | ---------------------- |
 | `cleanup-and-build.sh` | ~2-3 min | ✅ Fresh install | ✅ Complete clean | ✅ All caches cleared | Major issues, updates  |
 | `quick-cleanup.sh`     | ~30 sec  | ✅ Preserved     | ✅ Clean rebuild  | ✅ Preserved          | Development iterations |
 

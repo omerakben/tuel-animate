@@ -209,10 +209,10 @@ All components follow consistent prop patterns:
 
 ```tsx
 interface BaseAnimationProps {
-  className?: string;       // Custom CSS classes
-  duration?: number;        // Animation duration in seconds
-  delay?: number;          // Animation delay in seconds
-  easing?: string;         // Easing function
+  className?: string; // Custom CSS classes
+  duration?: number; // Animation duration in seconds
+  delay?: number; // Animation delay in seconds
+  easing?: string; // Easing function
   onComplete?: () => void; // Completion callback
 }
 ```
@@ -230,7 +230,7 @@ import '@tuel/components/styles/animations.css';
 
    ```tsx
    const ParticleWave = lazy(() =>
-     import('@tuel/components').then(m => ({ default: m.ParticleWave }))
+     import('@tuel/components').then((m) => ({ default: m.ParticleWave }))
    );
    ```
 
@@ -238,10 +238,9 @@ import '@tuel/components/styles/animations.css';
 
    ```tsx
    import dynamic from 'next/dynamic';
-   const ThreeScene = dynamic(
-     () => import('@tuel/components').then(m => m.ThreeOrbitScene),
-     { ssr: false }
-   );
+   const ThreeScene = dynamic(() => import('@tuel/components').then((m) => m.ThreeOrbitScene), {
+     ssr: false,
+   });
    ```
 
 3. **Optimize Bundle Size**

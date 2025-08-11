@@ -6,62 +6,158 @@ const testPages = [
   {
     category: 'Scroll Animations',
     pages: [
-      { href: '/scroll/reveal-on-scroll', title: 'Reveal on Scroll', description: 'Elements reveal with various animations on scroll' },
-      { href: '/scroll/scroll-frame', title: 'Frame Animation', description: 'Frame-by-frame animations triggered by scroll' },
-      { href: '/scroll/parallax', title: 'Parallax Scroll', description: 'Multi-layer parallax scrolling effects' },
-      { href: '/scroll/sticky-cards', title: 'Sticky Cards', description: 'Cards that stick and transform on scroll' },
-      { href: '/scroll/minimap', title: 'Scroll Minimap', description: 'Navigation minimap with scroll progress' },
+      {
+        href: '/scroll/reveal-on-scroll',
+        title: 'Reveal on Scroll',
+        description: 'Elements reveal with various animations on scroll',
+      },
+      {
+        href: '/scroll/scroll-frame',
+        title: 'Frame Animation',
+        description: 'Frame-by-frame animations triggered by scroll',
+      },
+      {
+        href: '/scroll/parallax',
+        title: 'Parallax Scroll',
+        description: 'Multi-layer parallax scrolling effects',
+      },
+      {
+        href: '/scroll/sticky-cards',
+        title: 'Sticky Cards',
+        description: 'Cards that stick and transform on scroll',
+      },
+      {
+        href: '/scroll/minimap',
+        title: 'Scroll Minimap',
+        description: 'Navigation minimap with scroll progress',
+      },
     ],
   },
   {
     category: 'Page Transitions',
     pages: [
-      { href: '/transitions/page-transition', title: 'Page Transitions', description: 'Various page transition effects' },
-      { href: '/transitions/route-transition', title: 'Route Transitions', description: 'Next.js router transitions' },
-      { href: '/transitions/smooth-scroll', title: 'Smooth Scroll', description: 'Lenis-like smooth scrolling' },
-      { href: '/transitions/image-trail', title: 'Image Trail', description: 'Mouse trail effects with images' },
+      {
+        href: '/transitions/page-transition',
+        title: 'Page Transitions',
+        description: 'Various page transition effects',
+      },
+      {
+        href: '/transitions/route-transition',
+        title: 'Route Transitions',
+        description: 'Next.js router transitions',
+      },
+      {
+        href: '/transitions/smooth-scroll',
+        title: 'Smooth Scroll',
+        description: 'Lenis-like smooth scrolling',
+      },
+      {
+        href: '/transitions/image-trail',
+        title: 'Image Trail',
+        description: 'Mouse trail effects with images',
+      },
     ],
   },
   {
     category: 'Text Effects',
     pages: [
-      { href: '/text/animated-text', title: 'Animated Text', description: 'Split, scramble, wave, typewriter effects' },
-      { href: '/text/particle-text', title: 'Particle Text', description: 'Text to particle animations' },
+      {
+        href: '/text/animated-text',
+        title: 'Animated Text',
+        description: 'Split, scramble, wave, typewriter effects',
+      },
+      {
+        href: '/text/particle-text',
+        title: 'Particle Text',
+        description: 'Text to particle animations',
+      },
     ],
   },
   {
     category: '3D/WebGL',
     pages: [
-      { href: '/three/orbit-scene', title: '3D Orbit Scene', description: 'Basic Three.js scene with orbit controls' },
-      { href: '/three/phantom-gallery', title: 'Phantom Gallery', description: 'WebGL shader-based infinite gallery' },
-      { href: '/three/floating-objects', title: 'Floating Objects', description: '3D floating shapes with distortion' },
-      { href: '/three/particle-wave', title: 'Particle Wave', description: '3D particle wave system' },
-      { href: '/three/morphing-shapes', title: 'Morphing Shapes', description: 'Shape morphing animations' },
+      {
+        href: '/three/orbit-scene',
+        title: '3D Orbit Scene',
+        description: 'Basic Three.js scene with orbit controls',
+      },
+      {
+        href: '/three/phantom-gallery',
+        title: 'Phantom Gallery',
+        description: 'WebGL shader-based infinite gallery',
+      },
+      {
+        href: '/three/floating-objects',
+        title: 'Floating Objects',
+        description: '3D floating shapes with distortion',
+      },
+      {
+        href: '/three/particle-wave',
+        title: 'Particle Wave',
+        description: '3D particle wave system',
+      },
+      {
+        href: '/three/morphing-shapes',
+        title: 'Morphing Shapes',
+        description: 'Shape morphing animations',
+      },
     ],
   },
   {
     category: 'Particles & Canvas',
     pages: [
-      { href: '/canvas/particle-field', title: 'Particle Field', description: 'Interactive particle system with physics' },
+      {
+        href: '/canvas/particle-field',
+        title: 'Particle Field',
+        description: 'Interactive particle system with physics',
+      },
       { href: '/canvas/wave-canvas', title: 'Wave Canvas', description: 'Animated wave patterns' },
       { href: '/canvas/noise-field', title: 'Noise Field', description: 'Perlin noise flow field' },
-      { href: '/canvas/canvas-animation', title: 'Canvas Animation', description: 'Custom canvas wrapper animations' },
+      {
+        href: '/canvas/canvas-animation',
+        title: 'Canvas Animation',
+        description: 'Custom canvas wrapper animations',
+      },
     ],
   },
   {
     category: 'UI Components',
     pages: [
-      { href: '/ui/carousel', title: 'Carousel', description: 'Multiple carousel animation variants' },
-      { href: '/ui/animated-menu', title: 'Animated Menu', description: 'Menu animations (slide, overlay, push, morph)' },
-      { href: '/ui/image-gallery', title: 'Image Gallery', description: 'Multiple gallery layout options' },
-      { href: '/ui/hero-section', title: 'Hero Section', description: 'Landing page hero with parallax' },
-      { href: '/ui/infinite-marquee', title: 'Infinite Marquee', description: 'Auto-scrolling content marquee' },
+      {
+        href: '/ui/carousel',
+        title: 'Carousel',
+        description: 'Multiple carousel animation variants',
+      },
+      {
+        href: '/ui/animated-menu',
+        title: 'Animated Menu',
+        description: 'Menu animations (slide, overlay, push, morph)',
+      },
+      {
+        href: '/ui/image-gallery',
+        title: 'Image Gallery',
+        description: 'Multiple gallery layout options',
+      },
+      {
+        href: '/ui/hero-section',
+        title: 'Hero Section',
+        description: 'Landing page hero with parallax',
+      },
+      {
+        href: '/ui/infinite-marquee',
+        title: 'Infinite Marquee',
+        description: 'Auto-scrolling content marquee',
+      },
     ],
   },
   {
     category: 'Hover Effects',
     pages: [
-      { href: '/hover/distortion', title: 'Hover Distortion', description: 'WebGL image distortion on hover' },
+      {
+        href: '/hover/distortion',
+        title: 'Hover Distortion',
+        description: 'WebGL image distortion on hover',
+      },
     ],
   },
 ];
@@ -81,7 +177,10 @@ export default function HomePage() {
 
         <div className="grid gap-12">
           {testPages.map((category) => (
-            <section key={category.category} className="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
+            <section
+              key={category.category}
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-8"
+            >
               <h2 className="text-3xl font-bold text-white mb-6 border-b border-white/20 pb-4">
                 {category.category}
               </h2>
@@ -96,9 +195,7 @@ export default function HomePage() {
                       <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors">
                         {page.title}
                       </h3>
-                      <p className="text-gray-300 text-sm">
-                        {page.description}
-                      </p>
+                      <p className="text-gray-300 text-sm">{page.description}</p>
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-pink-600/0 group-hover:from-purple-600/10 group-hover:to-pink-600/10 transition-all duration-300" />
                   </Link>

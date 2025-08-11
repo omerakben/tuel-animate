@@ -14,7 +14,7 @@ export const rotateVariants: Variants = {
 };
 
 export const rotate3DVariants: Variants = {
-  hidden: { 
+  hidden: {
     rotateX: -90,
     opacity: 0,
   },

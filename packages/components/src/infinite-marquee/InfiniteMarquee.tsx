@@ -49,7 +49,7 @@ export function InfiniteMarquee({
 
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
-    
+
     return () => {
       window.removeEventListener('resize', updateDimensions);
     };
@@ -64,7 +64,7 @@ export function InfiniteMarquee({
     if (!isPaused) {
       const animationProperty = isHorizontal ? 'x' : 'y';
       const animationValues = isReverse ? [0, distance] : [-distance, 0];
-      
+
       controls.start({
         [animationProperty]: animationValues,
         transition: {
@@ -110,11 +110,7 @@ export function InfiniteMarquee({
     const content = (
       <div
         ref={contentRef}
-        className={cn(
-          'flex',
-          isHorizontal ? 'flex-row' : 'flex-col',
-          `gap-[${gap}px]`
-        )}
+        className={cn('flex', isHorizontal ? 'flex-row' : 'flex-col', `gap-[${gap}px]`)}
         style={{ gap: `${gap}px` }}
       >
         {children}
@@ -128,11 +124,7 @@ export function InfiniteMarquee({
       <>
         {content}
         <div
-          className={cn(
-            'flex',
-            isHorizontal ? 'flex-row' : 'flex-col',
-            `gap-[${gap}px]`
-          )}
+          className={cn('flex', isHorizontal ? 'flex-row' : 'flex-col', `gap-[${gap}px]`)}
           style={{ gap: `${gap}px` }}
           aria-hidden="true"
         >
@@ -145,11 +137,7 @@ export function InfiniteMarquee({
   return (
     <div
       ref={containerRef}
-      className={cn(
-        'overflow-hidden',
-        'relative',
-        className
-      )}
+      className={cn('overflow-hidden', 'relative', className)}
       style={gradientMask}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -158,11 +146,7 @@ export function InfiniteMarquee({
     >
       <motion.div
         animate={controls}
-        className={cn(
-          'flex',
-          isHorizontal ? 'flex-row' : 'flex-col',
-          'will-change-transform'
-        )}
+        className={cn('flex', isHorizontal ? 'flex-row' : 'flex-col', 'will-change-transform')}
         style={{ gap: `${gap}px` }}
       >
         {renderContent()}

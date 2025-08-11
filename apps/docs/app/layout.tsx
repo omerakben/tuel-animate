@@ -9,11 +9,7 @@ export const metadata: Metadata = {
   description: 'Premium React animation components with GSAP, Framer Motion, and Three.js',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>

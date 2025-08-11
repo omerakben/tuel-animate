@@ -60,18 +60,8 @@ function FloatingObject({
   });
 
   return (
-    <Float
-      speed={speed}
-      rotationIntensity={rotationSpeed}
-      floatIntensity={floatIntensity}
-    >
-      <mesh
-        ref={meshRef}
-        position={position}
-        rotation={rotation}
-        scale={scale}
-        castShadow
-      >
+    <Float speed={speed} rotationIntensity={rotationSpeed} floatIntensity={floatIntensity}>
+      <mesh ref={meshRef} position={position} rotation={rotation} scale={scale} castShadow>
         {geometry}
         {distort > 0 ? (
           <MeshDistortMaterial
@@ -104,7 +94,17 @@ export interface FloatingObjectsProps {
   fogNear?: number;
   fogFar?: number;
   shadows?: boolean;
-  environment?: 'sunset' | 'dawn' | 'night' | 'warehouse' | 'forest' | 'apartment' | 'studio' | 'city' | 'park' | 'lobby';
+  environment?:
+    | 'sunset'
+    | 'dawn'
+    | 'night'
+    | 'warehouse'
+    | 'forest'
+    | 'apartment'
+    | 'studio'
+    | 'city'
+    | 'park'
+    | 'lobby';
   ambientIntensity?: number;
   cameraPosition?: [number, number, number];
   autoRotate?: boolean;
@@ -138,25 +138,19 @@ export function FloatingObjects({
         style={{ background: backgroundColor }}
       >
         {fog && <fog attach="fog" args={[fogColor, fogNear, fogFar]} />}
-        
+
         <ambientLight intensity={ambientIntensity} />
         <pointLight position={[10, 10, 10]} intensity={1} castShadow />
         <pointLight position={[-10, -10, -10]} intensity={0.5} />
-        
+
         {environment && <Environment preset={environment} />}
-        
+
         {objects.map((obj, index) => (
           <FloatingObject key={index} {...obj} />
         ))}
-        
+
         {shadows && (
-          <ContactShadows
-            position={[0, -2, 0]}
-            opacity={0.4}
-            scale={10}
-            blur={2}
-            far={4}
-          />
+          <ContactShadows position={[0, -2, 0]} opacity={0.4} scale={10} blur={2} far={4} />
         )}
       </Canvas>
     </div>

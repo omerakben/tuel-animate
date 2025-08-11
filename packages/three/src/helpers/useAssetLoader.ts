@@ -10,6 +10,6 @@ export function useAssetLoader(url: string, type: 'gltf' | 'texture' = 'texture'
     }
     return useLoader(TextureLoader, url);
   }, [url, type]);
-  
+
   return asset;
 }

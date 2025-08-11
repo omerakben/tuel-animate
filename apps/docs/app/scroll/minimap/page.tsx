@@ -186,7 +186,9 @@ export default function ScrollMinimapPage() {
 
         {/* Features Section */}
         <div
-          ref={(el) => { if (el) sectionsRef.current[1] = el; }}
+          ref={(el) => {
+            if (el) sectionsRef.current[1] = el;
+          }}
           className="min-h-screen flex flex-col justify-center"
         >
           <div className="max-w-4xl">
@@ -225,7 +227,9 @@ export default function ScrollMinimapPage() {
 
         {/* Interactive Demo Section */}
         <div
-          ref={(el) => { if (el) sectionsRef.current[2] = el; }}
+          ref={(el) => {
+            if (el) sectionsRef.current[2] = el;
+          }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h2 className="text-5xl font-bold mb-8 text-purple-400">Interactive Demo</h2>
@@ -287,7 +291,9 @@ export default function ScrollMinimapPage() {
 
         {/* Usage Examples Section */}
         <div
-          ref={(el) => { if (el) sectionsRef.current[3] = el; }}
+          ref={(el) => {
+            if (el) sectionsRef.current[3] = el;
+          }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h2 className="text-5xl font-bold mb-8 text-orange-400">Usage Examples</h2>
@@ -325,7 +331,9 @@ export default function MyPage() {
 
         {/* API Reference Section */}
         <div
-          ref={(el) => { if (el) sectionsRef.current[4] = el; }}
+          ref={(el) => {
+            if (el) sectionsRef.current[4] = el;
+          }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h2 className="text-5xl font-bold mb-8 text-red-400">API Reference</h2>
@@ -372,7 +380,9 @@ export default function MyPage() {
 
         {/* Performance Section */}
         <div
-          ref={(el) => { if (el) sectionsRef.current[5] = el; }}
+          ref={(el) => {
+            if (el) sectionsRef.current[5] = el;
+          }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h2 className="text-5xl font-bold mb-8 text-yellow-400">Performance</h2>
@@ -408,7 +418,9 @@ export default function MyPage() {
 
         {/* Accessibility Section */}
         <div
-          ref={(el) => { if (el) sectionsRef.current[6] = el; }}
+          ref={(el) => {
+            if (el) sectionsRef.current[6] = el;
+          }}
           className="min-h-screen flex flex-col justify-center"
         >
           <h2 className="text-5xl font-bold mb-8 text-pink-400">Accessibility</h2>

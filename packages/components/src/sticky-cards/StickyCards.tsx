@@ -49,7 +49,7 @@ export function StickyCards({
 
     cards.forEach((card, index) => {
       const isLast = index === cards.length - 1;
-      
+
       // Create scroll trigger for each card
       ScrollTrigger.create({
         trigger: card,
@@ -60,19 +60,19 @@ export function StickyCards({
         pinSpacing: false,
         onUpdate: (self) => {
           const progress = self.progress;
-          
+
           if (scaleEffect && !isLast) {
-            const scale = 1 - (progress * 0.05);
+            const scale = 1 - progress * 0.05;
             gsap.set(card, { scale });
           }
-          
+
           if (rotateEffect && !isLast) {
             const rotation = progress * 3;
             gsap.set(card, { rotation });
           }
-          
+
           if (fadeEffect && !isLast) {
-            const opacity = 1 - (progress * 0.3);
+            const opacity = 1 - progress * 0.3;
             gsap.set(card, { opacity });
           }
         },
@@ -81,7 +81,7 @@ export function StickyCards({
   }, [cards.length, overlap, scaleEffect, rotateEffect, fadeEffect]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={cn('relative', className)}
       style={{ minHeight: `${cards.length * spacing}vh` }}
@@ -103,18 +103,14 @@ export function StickyCards({
           }}
         >
           {card.image && (
-            <div 
+            <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url(${card.image})` }}
             />
           )}
           <div className="relative z-10 p-8">
-            {card.title && (
-              <h2 className="text-4xl font-bold mb-4">{card.title}</h2>
-            )}
-            {card.description && (
-              <p className="text-lg">{card.description}</p>
-            )}
+            {card.title && <h2 className="text-4xl font-bold mb-4">{card.title}</h2>}
+            {card.description && <p className="text-lg">{card.description}</p>}
             {card.content}
           </div>
         </div>

@@ -49,7 +49,7 @@ export function ScrollFrameAnimation({
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
     if (!context) return;
-    
+
     contextRef.current = context;
 
     const setCanvasSize = () => {
@@ -100,7 +100,7 @@ export function ScrollFrameAnimation({
     const context = contextRef.current;
     const canvas = canvasRef.current;
     const images = imagesRef.current;
-    
+
     if (!context || !canvas || images.length === 0) return;
 
     const img = images[Math.floor(frameIndex)];
@@ -163,11 +163,7 @@ export function ScrollFrameAnimation({
 
   return (
     <div ref={containerRef} className={cn('relative', className)}>
-      <canvas
-        ref={canvasRef}
-        className="fixed top-0 left-0 w-full h-full"
-        style={{ zIndex: -1 }}
-      />
+      <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full" style={{ zIndex: -1 }} />
       {children}
     </div>
   );

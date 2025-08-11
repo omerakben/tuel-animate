@@ -27,19 +27,19 @@ export function useScrollTrigger(
   options: ScrollTriggerOptions = {}
 ) {
   const triggerRef = useRef<ScrollTrigger | null>(null);
-  
+
   useEffect(() => {
     if (!animation || !isClient) return;
-    
+
     triggerRef.current = ScrollTrigger.create({
       animation,
       ...options,
     });
-    
+
     return () => {
       triggerRef.current?.kill();
     };
   }, [animation]);
-  
+
   return triggerRef.current;
 }

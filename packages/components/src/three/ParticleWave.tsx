@@ -79,12 +79,12 @@ function WaveParticles({
   spread = 10,
 }: WaveParticlesProps) {
   const pointsRef = useRef<THREE.Points>(null);
-  
+
   // Generate particle positions and random values
   const { positions, randoms } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const randoms = new Float32Array(count);
-    
+
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
       positions[i3] = (Math.random() - 0.5) * spread;
@@ -92,20 +92,23 @@ function WaveParticles({
       positions[i3 + 2] = (Math.random() - 0.5) * spread;
       randoms[i] = Math.random();
     }
-    
+
     return { positions, randoms };
   }, [count, spread]);
-  
+
   // Create uniforms
-  const uniforms = useMemo(() => ({
-    uTime: { value: 0 },
-    uColor1: { value: new THREE.Color(color1) },
-    uColor2: { value: new THREE.Color(color2) },
-    uWaveAmplitude: { value: waveAmplitude },
-    uWaveFrequency: { value: waveFrequency },
-    uWaveSpeed: { value: waveSpeed },
-  }), [color1, color2, waveAmplitude, waveFrequency, waveSpeed]);
-  
+  const uniforms = useMemo(
+    () => ({
+      uTime: { value: 0 },
+      uColor1: { value: new THREE.Color(color1) },
+      uColor2: { value: new THREE.Color(color2) },
+      uWaveAmplitude: { value: waveAmplitude },
+      uWaveFrequency: { value: waveFrequency },
+      uWaveSpeed: { value: waveSpeed },
+    }),
+    [color1, color2, waveAmplitude, waveFrequency, waveSpeed]
+  );
+
   // Animation
   useFrame((state) => {
     if (pointsRef.current) {
@@ -113,7 +116,7 @@ function WaveParticles({
       pointsRef.current.rotation.y = state.clock.elapsedTime * 0.05;
     }
   });
-  
+
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
@@ -123,12 +126,7 @@ function WaveParticles({
           array={positions}
           itemSize={3}
         />
-        <bufferAttribute
-          attach="attributes-aRandom"
-          count={count}
-          array={randoms}
-          itemSize={1}
-        />
+        <bufferAttribute attach="attributes-aRandom" count={count} array={randoms} itemSize={1} />
       </bufferGeometry>
       <shaderMaterial
         uniforms={uniforms}
@@ -186,7 +184,7 @@ export function ParticleWave({
         style={{ background: backgroundColor }}
       >
         {fog && <fog attach="fog" args={[fogColor, fogNear, fogFar]} />}
-        
+
         <WaveParticles
           count={particleCount}
           size={particleSize}

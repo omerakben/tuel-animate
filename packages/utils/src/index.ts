@@ -21,7 +21,7 @@ export const isTouchDevice = () => {
 export const getBreakpoint = () => {
   if (isServer) return 'lg';
   const width = window.innerWidth;
-  
+
   if (width < breakpoints.sm) return 'xs';
   if (width < breakpoints.md) return 'sm';
   if (width < breakpoints.lg) return 'md';

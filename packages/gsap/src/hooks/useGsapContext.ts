@@ -9,13 +9,13 @@ export function useGsapContext<T extends HTMLElement = HTMLDivElement>(
   dependencies: any[] = []
 ): MutableRefObject<T | null> {
   const ref = useRef<T>(null);
-  
+
   useIsomorphicLayoutEffect(() => {
     if (!ref.current) return;
-    
+
     const ctx = gsap.context(() => {}, ref);
     const cleanup = callback(ctx);
-    
+
     return () => {
       if (typeof cleanup === 'function') {
         cleanup();
@@ -23,6 +23,6 @@ export function useGsapContext<T extends HTMLElement = HTMLDivElement>(
       ctx.revert();
     };
   }, dependencies);
-  
+
   return ref;
 }

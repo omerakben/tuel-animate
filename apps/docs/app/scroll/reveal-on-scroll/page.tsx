@@ -28,14 +28,15 @@ export default function RevealOnScrollPage() {
         <header className="mb-12">
           <h1 className="text-5xl font-bold text-white mb-4">Reveal on Scroll</h1>
           <p className="text-xl text-gray-300">
-            Animate elements into view as users scroll. Supports both GSAP and Framer Motion engines.
+            Animate elements into view as users scroll. Supports both GSAP and Framer Motion
+            engines.
           </p>
         </header>
 
         {/* Controls */}
         <section className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-white mb-6">Animation Controls</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div>
               <label className="block text-white mb-2">Engine</label>

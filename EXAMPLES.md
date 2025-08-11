@@ -219,11 +219,7 @@ import { ImageTrail } from '@tuel/components';
 function MouseTrail() {
   return (
     <ImageTrail
-      images={[
-        '/trail/img1.jpg',
-        '/trail/img2.jpg',
-        '/trail/img3.jpg',
-      ]}
+      images={['/trail/img1.jpg', '/trail/img2.jpg', '/trail/img3.jpg']}
       imageSize={{ width: 200, height: 200 }}
       maxImages={10}
       threshold={100}
@@ -258,19 +254,9 @@ function TextAnimations() {
         className="text-6xl font-bold"
       />
 
-      <AnimatedText
-        text="Scramble Effect"
-        variant="scramble"
-        duration={2}
-        scrambleSpeed={50}
-      />
+      <AnimatedText text="Scramble Effect" variant="scramble" duration={2} scrambleSpeed={50} />
 
-      <AnimatedText
-        text="Wave Animation"
-        variant="wave"
-        waveHeight={20}
-        waveSpeed={0.5}
-      />
+      <AnimatedText text="Wave Animation" variant="wave" waveHeight={20} waveSpeed={0.5} />
     </>
   );
 }
@@ -459,8 +445,24 @@ function WaveBackground() {
   return (
     <WaveCanvas
       waves={[
-        { amplitude: 50, frequency: 0.01, speed: 0.02, phase: 0, color: '#3b82f6', lineWidth: 2, opacity: 1 },
-        { amplitude: 30, frequency: 0.02, speed: 0.03, phase: Math.PI / 4, color: '#8b5cf6', lineWidth: 2, opacity: 0.8 },
+        {
+          amplitude: 50,
+          frequency: 0.01,
+          speed: 0.02,
+          phase: 0,
+          color: '#3b82f6',
+          lineWidth: 2,
+          opacity: 1,
+        },
+        {
+          amplitude: 30,
+          frequency: 0.02,
+          speed: 0.03,
+          phase: Math.PI / 4,
+          color: '#8b5cf6',
+          lineWidth: 2,
+          opacity: 0.8,
+        },
       ]}
       fillMode={false}
       gradient={true}
@@ -653,7 +655,7 @@ function DistortionImage() {
 import { lazy, Suspense } from 'react';
 
 const ParticleWave = lazy(() =>
-  import('@tuel/components').then(m => ({ default: m.ParticleWave }))
+  import('@tuel/components').then((m) => ({ default: m.ParticleWave }))
 );
 
 function App() {
@@ -670,10 +672,9 @@ function App() {
 ```tsx
 import dynamic from 'next/dynamic';
 
-const ThreeScene = dynamic(
-  () => import('@tuel/components').then(m => m.FloatingObjects),
-  { ssr: false }
-);
+const ThreeScene = dynamic(() => import('@tuel/components').then((m) => m.FloatingObjects), {
+  ssr: false,
+});
 ```
 
 ### 3. Conditional Loading
@@ -707,11 +708,7 @@ import '@tuel/components/styles/animations.css';
 All components are fully typed. Import types for better IDE support:
 
 ```tsx
-import type {
-  ParticleFieldProps,
-  CarouselProps,
-  AnimatedTextProps
-} from '@tuel/components';
+import type { ParticleFieldProps, CarouselProps, AnimatedTextProps } from '@tuel/components';
 ```
 
 ---

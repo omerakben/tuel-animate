@@ -12,6 +12,7 @@
 **Tuel Animate** is a sophisticated TypeScript-first animation component library built from 87+ creative web templates. It represents a **professional-grade animation ecosystem** that expertly combines GSAP, Framer Motion, and Three.js into a cohesive, production-ready toolkit.
 
 ### 🎯 Key Highlights
+
 - **30+ Core Components** with 60+ variants
 - **SSR-Safe** architecture with Next.js optimization
 - **Tree-Shakeable** design for optimal bundle size
@@ -24,6 +25,7 @@
 ## 🏗️ Architecture Overview
 
 ### **Package Structure**
+
 ```
 @tuel/animate-monorepo/
 ├── apps/docs/                 # Next.js documentation site
@@ -38,6 +40,7 @@
 ```
 
 ### **Technology Stack**
+
 - **Frontend**: React 18+ with TypeScript 5.3+
 - **Bundling**: Turbo + pnpm workspaces
 - **Animation Libraries**:
@@ -54,6 +57,7 @@
 ### 🔄 **1. Scroll Animations** (5 Components)
 
 #### **ScrollFrameAnimation**
+
 - **Purpose**: Frame-by-frame animations triggered by scroll
 - **Use Cases**: Product showcases, storytelling, cinematic reveals
 - **Key Features**:
@@ -74,6 +78,7 @@
 ```
 
 #### **ParallaxScroll**
+
 - **Purpose**: Multi-layer parallax scrolling effects
 - **Use Cases**: Hero sections, immersive storytelling, depth illusion
 - **Key Features**:
@@ -94,6 +99,7 @@
 ```
 
 #### **RevealOnScroll**
+
 - **Purpose**: Elements reveal with various animations on scroll
 - **Use Cases**: Card grids, content sections, progressive disclosure
 - **Key Features**:
@@ -109,6 +115,7 @@
 ```
 
 #### **StickyCards**
+
 - **Purpose**: Stacking cards that stick and transform on scroll
 - **Use Cases**: Portfolio showcases, feature highlights, progressive reveals
 - **Key Features**:
@@ -118,15 +125,11 @@
   - Responsive behavior
 
 ```tsx
-<StickyCards
-  cards={cardData}
-  variant="scale"
-  spacing={100}
-  scaleOffset={0.05}
-/>
+<StickyCards cards={cardData} variant="scale" spacing={100} scaleOffset={0.05} />
 ```
 
 #### **ScrollMinimap**
+
 - **Purpose**: Navigation minimap with scroll progress
 - **Use Cases**: Long-form content, documentation, progress indication
 - **Key Features**:
@@ -140,6 +143,7 @@
 ### 🎭 **2. Page Transitions** (5 Components)
 
 #### **PageTransition**
+
 - **Purpose**: 10+ transition variants for page changes
 - **Use Cases**: SPA navigation, route changes, modal transitions
 - **Key Features**:
@@ -155,6 +159,7 @@
 ```
 
 #### **RouteTransition**
+
 - **Purpose**: Next.js router integration for seamless transitions
 - **Use Cases**: Next.js apps, client-side navigation
 - **Key Features**:
@@ -164,6 +169,7 @@
   - SSR compatibility
 
 #### **SmoothScroll**
+
 - **Purpose**: Lenis-like smooth scrolling implementation
 - **Use Cases**: Premium websites, smooth user experience
 - **Key Features**:
@@ -179,6 +185,7 @@
 ```
 
 #### **ImageTrail**
+
 - **Purpose**: Mouse trail effects with images
 - **Use Cases**: Interactive galleries, creative showcases
 - **Key Features**:
@@ -192,6 +199,7 @@
 ### ✍️ **3. Text Effects** (2 Components)
 
 #### **AnimatedText**
+
 - **Purpose**: 7 animation variants for text reveals
 - **Use Cases**: Headlines, hero text, typographic emphasis
 - **Animation Variants**:
@@ -214,6 +222,7 @@
 ```
 
 #### **ParticleText**
+
 - **Purpose**: Interactive text to particle animations
 - **Use Cases**: Creative headers, interactive art, branding
 - **Key Features**:
@@ -227,6 +236,7 @@
 ### 🌐 **4. 3D/WebGL** (5 Components)
 
 #### **FloatingObjects**
+
 - **Purpose**: 3D floating shapes with distortion effects
 - **Use Cases**: Hero backgrounds, ambient decoration, brand elements
 - **Key Features**:
@@ -236,6 +246,7 @@
   - Camera interaction support
 
 #### **ThreeOrbitScene**
+
 - **Purpose**: Basic Three.js scene with orbit controls
 - **Use Cases**: Product showcases, 3D model display
 - **Key Features**:
@@ -256,6 +267,7 @@
 ### 🎨 **5. Particles & Canvas** (5 Components)
 
 #### **ParticleField**
+
 - **Purpose**: Interactive particle systems
 - **Use Cases**: Background effects, data visualization
 - **Key Features**:
@@ -265,6 +277,7 @@
   - Multiple blend modes
 
 #### **WaveCanvas**
+
 - **Purpose**: Animated wave patterns on canvas
 - **Use Cases**: Fluid backgrounds, loading animations
 - **Key Features**:
@@ -274,6 +287,7 @@
   - Responsive sizing
 
 #### **NoiseField**
+
 - **Purpose**: Perlin noise-based visual effects
 - **Use Cases**: Organic backgrounds, texture generation
 - **Key Features**:
@@ -287,6 +301,7 @@
 ### 🧩 **6. UI Components** (8 Components)
 
 #### **Carousel**
+
 - **Purpose**: 6 animation variants for content carousels
 - **Animation Variants**:
   - **Fade**: Crossfade transitions
@@ -297,18 +312,15 @@
   - **Parallax**: Multi-layer parallax scrolling
 
 ```tsx
-<Carousel
-  variant="coverflow"
-  autoplay={true}
-  interval={5000}
-  navigation={true}
-  pagination={true}
->
-  {slides.map(slide => <SlideComponent key={slide.id} {...slide} />)}
+<Carousel variant="coverflow" autoplay={true} interval={5000} navigation={true} pagination={true}>
+  {slides.map((slide) => (
+    <SlideComponent key={slide.id} {...slide} />
+  ))}
 </Carousel>
 ```
 
 #### **AnimatedMenu**
+
 - **Purpose**: 5 menu animation types
 - **Animation Types**:
   - **Slide**: Panel slide-in/out
@@ -318,6 +330,7 @@
   - **Circular**: Radial menu expansion
 
 #### **ImageGallery**
+
 - **Purpose**: Multiple layout options for image display
 - **Layout Options**:
   - **Grid**: Responsive grid layout
@@ -326,6 +339,7 @@
   - **Lightbox**: Modal image viewing
 
 #### **InfiniteMarquee**
+
 - **Purpose**: Auto-scrolling content with hover pause
 - **Use Cases**: Testimonials, partner logos, news tickers
 - **Key Features**:
@@ -345,6 +359,7 @@
 ## 🛠️ Technical Implementation Details
 
 ### **SSR Safety Patterns**
+
 ```typescript
 // Client-only component wrapper
 import { ClientOnly } from '@tuel/three';
@@ -360,6 +375,7 @@ import { useIsomorphicLayoutEffect } from '@tuel/gsap';
 ### **Animation Hooks & Utilities**
 
 #### **useGsapContext**
+
 ```typescript
 export function useGsapContext<T extends HTMLElement = HTMLDivElement>(
   callback: GsapContextCallback,
@@ -402,24 +418,28 @@ export function useGsapContext<T extends HTMLElement = HTMLDivElement>(
 ### **Example Use Cases by Industry**
 
 #### **E-commerce**
+
 - Product image carousels with 3D effects
 - Scroll-triggered product reveals
 - Interactive hover distortions
 - Smooth page transitions for checkout
 
 #### **Portfolios & Agencies**
+
 - Parallax hero sections
 - Image galleries with advanced transitions
 - Text scramble effects for branding
 - 3D floating elements for visual impact
 
 #### **SaaS & Tech**
+
 - Feature reveal animations
 - Data visualization with particles
 - Smooth scroll for landing pages
 - Interactive menu systems
 
 #### **Media & Entertainment**
+
 - Frame-by-frame scroll animations
 - Video-like transitions
 - Particle text effects
@@ -432,11 +452,12 @@ export function useGsapContext<T extends HTMLElement = HTMLDivElement>(
 ### **Optimization Strategies**
 
 #### **1. Lazy Loading**
+
 ```tsx
 import { lazy, Suspense } from 'react';
 
 const ParticleWave = lazy(() =>
-  import('@tuel/components').then(m => ({ default: m.ParticleWave }))
+  import('@tuel/components').then((m) => ({ default: m.ParticleWave }))
 );
 
 function App() {
@@ -449,6 +470,7 @@ function App() {
 ```
 
 #### **2. Tree Shaking**
+
 ```tsx
 // Import only what you need
 import { ParallaxScroll, RevealOnScroll } from '@tuel/components';
@@ -458,6 +480,7 @@ import { ParallaxScroll, RevealOnScroll } from '@tuel/components';
 ```
 
 ### **Bundle Size Analysis**
+
 - **Core Components**: ~400KB (minified)
 - **Individual Components**: 5-50KB each
 - **Tree-shakeable**: Only pay for what you use
@@ -468,6 +491,7 @@ import { ParallaxScroll, RevealOnScroll } from '@tuel/components';
 ## 🚀 Getting Started Guide
 
 ### **Installation**
+
 ```bash
 npm install @tuel/components @tuel/tokens @tuel/utils
 # or
@@ -477,20 +501,18 @@ pnpm add @tuel/components @tuel/tokens @tuel/utils
 ```
 
 ### **Peer Dependencies**
+
 ```bash
 npm install framer-motion gsap @react-three/fiber @react-three/drei three
 ```
 
 ### **Next.js Setup**
+
 ```tsx
 // app/layout.tsx
 import '@tuel/components/styles.css';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>{children}</body>
@@ -500,6 +522,7 @@ export default function RootLayout({
 ```
 
 ### **Basic Usage**
+
 ```tsx
 // pages/index.tsx
 import { RevealOnScroll, ParallaxScroll } from '@tuel/components';
@@ -512,9 +535,7 @@ export default function HomePage() {
       </ParallaxScroll>
 
       <RevealOnScroll animation="fade-up">
-        <div className="content">
-          Your content here
-        </div>
+        <div className="content">Your content here</div>
       </RevealOnScroll>
     </div>
   );
@@ -526,12 +547,15 @@ export default function HomePage() {
 ## 🐛 Current Issues & Improvements
 
 ### **TypeScript Build Errors**
+
 Current build issues in components package:
+
 - Unused imports in several components
 - Type mismatches in Gallery and Text components
 - Missing required props in some Three.js components
 
 ### **Recommended Fixes**
+
 1. **Cleanup unused imports** across all components
 2. **Fix TypeScript strict mode issues**
 3. **Add missing required props** for Three.js components
@@ -539,6 +563,7 @@ Current build issues in components package:
 5. **Add comprehensive tests** for all components
 
 ### **Future Enhancements**
+
 1. **More animation variants** for existing components
 2. **Vue.js support** alongside React
 3. **React Native compatibility** for mobile apps
