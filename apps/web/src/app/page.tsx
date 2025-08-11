@@ -28,6 +28,11 @@ export default function HomePage() {
       description: 'Canvas-based triangle grid scroll animation',
     },
     {
+      href: '/radga-horizontal-scroll',
+      title: 'Radga Horizontal Scroll',
+      description: 'Horizontal slide gallery with parallax images',
+    },
+    {
       href: '/thefirstthelast-scroll',
       title: 'TheFirstTheLast Scroll',
       description: 'Stacked card reveal scroll animation',
