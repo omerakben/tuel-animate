@@ -267,15 +267,13 @@ export function OrchestraCubes({
   const cubesRef = useRef<HTMLDivElement>(null);
   const header1Ref = useRef<HTMLDivElement>(null);
   const header2Ref = useRef<HTMLDivElement>(null);
-  const [cubeRefs] = useState(() =>
-    Object.keys(cubesData).reduce(
-      (acc, key) => {
-        acc[key] = useRef<HTMLDivElement>(null);
-        return acc;
-      },
-      {} as Record<string, React.RefObject<HTMLDivElement | null>>
-    )
-  );
+  const [cubeRefs] = useState(() => {
+    const refs: Record<string, React.RefObject<HTMLDivElement | null>> = {};
+    Object.keys(cubesData).forEach((key) => {
+      refs[key] = { current: null };
+    });
+    return refs;
+  });
 
   const interpolate = (start: number, end: number, progress: number) => {
     return start + (end - start) * progress;
