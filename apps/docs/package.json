@@ -21,7 +21,7 @@
     "@tuel/utils": "workspace:*",
     "framer-motion": "^11.0.0",
     "gsap": "^3.12.5",
-    "next": "15.4.6",
+    "next": "15.5.15",
     "react": "19.0.0-rc.1",
     "react-dom": "19.0.0-rc.1",
     "three": "^0.179.1"
